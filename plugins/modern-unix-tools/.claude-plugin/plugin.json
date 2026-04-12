@@ -1,0 +1,22 @@
+{
+  "name": "modern-unix-tools",
+  "version": "0.1.0",
+  "description": "Teaches Claude to prefer modern Rust/Go/C++ replacements for classic Unix tools. Includes a skill with full mapping (ripgrep/fd/sd/bat/eza/zoxide/dust/delta/hyperfine/tokei/grex/tealdeer/watchexec/just/jq/yq) and syntax divergence cheatsheets.",
+  "author": {
+    "name": "austyle-io",
+    "url": "https://github.com/austyle-io"
+  },
+  "homepage": "https://github.com/austyle-io/austdx-cc-mkpl",
+  "repository": "https://github.com/austyle-io/austdx-cc-mkpl",
+  "license": "MIT",
+  "keywords": [
+    "unix",
+    "cli",
+    "rust",
+    "modern-tooling",
+    "developer-experience",
+    "ripgrep",
+    "fd",
+    "sd"
+  ]
+}

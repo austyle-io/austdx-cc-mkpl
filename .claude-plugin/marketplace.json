@@ -1,0 +1,35 @@
+{
+  "name": "austdx-cc-mkpl",
+  "owner": {
+    "name": "austyle-io"
+  },
+  "metadata": {
+    "description": "Austin's Claude Code plugin marketplace — opinionated DX plugins for agentic coding workflows.",
+    "version": "0.1.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "modern-unix-tools",
+      "source": "./plugins/modern-unix-tools",
+      "description": "Teaches Claude to prefer modern Rust/Go/C++ replacements (ripgrep, fd, sd, bat, eza, zoxide, dust, hyperfine, tokei, delta, etc.) over classic Unix tools (grep, find, sed, cat, ls, cd, du, time, wc) with syntax divergence cheatsheets and anti-patterns.",
+      "version": "0.1.0",
+      "author": {
+        "name": "austyle-io"
+      },
+      "license": "MIT",
+      "keywords": [
+        "unix",
+        "cli",
+        "rust",
+        "ripgrep",
+        "fd",
+        "sd",
+        "developer-experience",
+        "modern-tooling"
+      ],
+      "category": "developer-experience",
+      "tags": ["cli-tools", "rust", "modernization", "skill"]
+    }
+  ]
+}
