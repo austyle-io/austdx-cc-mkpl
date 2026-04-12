@@ -1,0 +1,81 @@
+{
+  "name": "austdx-cc-mkpl",
+  "owner": {
+    "name": "austyle-io"
+  },
+  "metadata": {
+    "description": "Austin's Claude Code plugin marketplace — opinionated DX plugins for agentic coding workflows.",
+    "version": "0.1.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "modern-unix-tools",
+      "source": "./plugins/modern-unix-tools",
+      "description": "Teaches Claude to prefer modern Rust/Go/C++ replacements for classic Unix tools. Includes a skill with full mapping (ripgrep/fd/sd/bat/eza/zoxide/dust/delta/hyperfine/tokei/grex/tealdeer/watchexec/just/jq/yq) and syntax divergence cheatsheets.",
+      "version": "0.1.0",
+      "author": {
+        "name": "austyle-io",
+        "url": "https://github.com/austyle-io"
+      },
+      "license": "MIT",
+      "keywords": [
+        "unix",
+        "cli",
+        "rust",
+        "modern-tooling",
+        "developer-experience",
+        "ripgrep",
+        "fd",
+        "sd"
+      ],
+      "category": "developer-experience",
+      "tags": ["cli-tools", "rust", "modernization", "skill"]
+    },
+    {
+      "name": "kbac",
+      "source": "./plugins/kbac",
+      "description": "Knowledge graph development toolkit — Cypher authoring guidance, TypeBox schema patterns, graph query design, and session context injection for the kbac Neo4j knowledge base",
+      "version": "0.1.2",
+      "author": {
+        "name": "austyle-io",
+        "url": "https://github.com/austyle-io"
+      },
+      "license": "MIT",
+      "keywords": [
+        "neo4j",
+        "cypher",
+        "knowledge-graph",
+        "typebox",
+        "graph-database"
+      ],
+      "category": "developer-experience",
+      "tags": ["knowledge-graph", "neo4j", "cypher", "typebox", "skill", "agent", "hook"]
+    },
+    {
+      "name": "edf",
+      "source": "./plugins/edf",
+      "description": "Enhanced Document Format toolkit — agents and skills for EDF document authoring, validation, runbook orchestration (executor + strategist), decision-tree patterns, workflow design, and EDF-specific Neo4j Cypher patterns. Companion plugin to the @austyle-io/edf TypeScript library.",
+      "version": "0.1.0",
+      "author": {
+        "name": "austyle-io",
+        "url": "https://github.com/austyle-io"
+      },
+      "license": "MIT",
+      "keywords": [
+        "edf",
+        "runbook",
+        "decision-tree",
+        "workflow",
+        "checklist",
+        "orchestration",
+        "validation",
+        "templates",
+        "skill",
+        "agent"
+      ],
+      "category": "developer-experience",
+      "tags": ["edf", "runbook", "orchestration", "decision-tree", "workflow", "agent", "skill"]
+    }
+  ]
+}

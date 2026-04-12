@@ -1,0 +1,19 @@
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+node_modules/
+
+# Yarn Berry — keep release/plugin binaries, ignore cache/state
+**/.yarn/*
+!**/.yarn/releases
+!**/.yarn/plugins
+.pnp.*
+
+# Temporary working artifacts (specs, plans, scratch)
+docs/superpowers/
+.remember/
+
+# Machine-local plugin config persisted by /kbac:kbac-init
+plugins/kbac/.claude/kbac.local.md
