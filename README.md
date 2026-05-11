@@ -7,6 +7,7 @@ Austin's Claude Code plugin marketplace — opinionated DX plugins for agentic c
 | Plugin | Purpose |
 |--------|---------|
 | [`modern-unix-tools`](./plugins/modern-unix-tools) | Teaches Claude to prefer modern Rust/Go/C++ CLI replacements (ripgrep, fd, sd, bat, eza, zoxide, dust, hyperfine, delta, tokei, grex, tealdeer, watchexec, just, jq, yq) over classic Unix tools (grep, find, sed, cat, ls, cd, du, time, wc). Includes syntax divergence cheatsheets, exit-code gotchas, and anti-patterns. |
+| [`kbac`](./plugins/kbac) | Knowledge graph development toolkit for the kbac Neo4j knowledge base. Bundles five skills (cypher-authoring, typebox-schema, graph-query-design, repo-setup, cli-toolchain), two review agents (cypher-reviewer, schema-sync-checker), and a SessionStart hook that injects current node/relationship schemas, seed files, and query templates into context. |
 
 More plugins to come.
 

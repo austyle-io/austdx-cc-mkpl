@@ -30,6 +30,25 @@
       ],
       "category": "developer-experience",
       "tags": ["cli-tools", "rust", "modernization", "skill"]
+    },
+    {
+      "name": "kbac",
+      "source": "./plugins/kbac",
+      "description": "Knowledge graph development toolkit — Cypher authoring guidance, TypeBox schema patterns, graph query design, and session context injection for the kbac Neo4j knowledge base",
+      "version": "0.1.2",
+      "author": {
+        "name": "austyle-io"
+      },
+      "license": "MIT",
+      "keywords": [
+        "neo4j",
+        "cypher",
+        "knowledge-graph",
+        "typebox",
+        "graph-database"
+      ],
+      "category": "developer-experience",
+      "tags": ["knowledge-graph", "neo4j", "cypher", "typebox", "skill", "agent", "hook"]
     }
   ]
 }
