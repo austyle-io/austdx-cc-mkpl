@@ -124,7 +124,7 @@ function detectCliTools(): string[] {
 
 // ── Main ─────────────────────────────────────────────────────
 
-const ajv = new Ajv({ allErrors: true });
+const ajv = new Ajv({ allErrors: true, strict: false });
 
 const context: GraphContext = {
   nodeSchemas: extractSchemaNames(join(schemasDir, "nodes.ts")),

@@ -53,13 +53,13 @@ You are a schema validation specialist for the kbac knowledge graph. Your job is
 
 1. Read `src/schemas/nodes.ts` — extract all schema definitions and their properties
 2. Read `src/schemas/relationships.ts` — extract relationship schema definitions
-3. Attempt live introspection:
+3. Attempt live introspection **[auth]**:
 
    ```bash
    yarn db:introspect
    ```
 
-   **Note:** This requires `varlock run` (1Password biometric auth). If the command fails, proceed with static analysis (step 4).
+   **Note:** This command runs via `varlock run` and triggers 1Password biometric auth. Claude cannot complete biometric prompts — the user must run this manually (e.g. via `!` prefix in Claude Code). If the command fails or is unavailable, proceed with static analysis (step 4).
 4. **Fallback — static analysis:** Read all seed files in `cypher/` to extract:
    - Node labels and properties from MERGE/SET statements
    - Relationship types and properties from MERGE/SET statements

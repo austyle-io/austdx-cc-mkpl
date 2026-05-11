@@ -13,9 +13,11 @@ description: >
 
 ## Overview
 
-kbac recommends modern Rust-based CLI tools that are faster, respect
-.gitignore by default, and produce cleaner output. This skill detects
-availability and guides usage patterns specific to this repo.
+kbac uses modern Rust-based CLI tools for code search, file discovery, text
+replacement, and structured data processing. For general tool installation,
+syntax divergences, and anti-patterns, see the
+[`modern-unix-tools`](../../modern-unix-tools/skills/modern-unix-tools/SKILL.md)
+plugin — this skill covers only **kbac-specific usage patterns**.
 
 ## Quick Detection
 
@@ -28,18 +30,6 @@ for tool in rg fd sd jq yq; do
   fi
 done
 ```
-
-## Tool Mapping
-
-| Modern | Replaces | Key Advantage | Install |
-|--------|----------|--------------|---------|
-| `rg` (ripgrep) | `grep -r` | Respects .gitignore, 10x faster, sane defaults | `brew install ripgrep` |
-| `fd` | `find` | Intuitive syntax, respects .gitignore, colorized | `brew install fd` |
-| `sd` | `sed` | No escaping hell, intuitive regex, in-place by default | `brew install sd` |
-| `jq` | `python -c 'import json...'` | JSON query, transform, and validate from shell | `brew install jq` |
-| `yq` | manual parsing | YAML query and transform, handles frontmatter | `brew install yq` |
-
-Install all at once: `brew install ripgrep fd sd jq yq`
 
 ## Usage Patterns for kbac
 
