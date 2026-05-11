@@ -1,0 +1,13 @@
+{
+  "name": "kbac",
+  "version": "0.1.2",
+  "description": "Knowledge graph development toolkit — Cypher authoring guidance, TypeBox schema patterns, graph query design, and session context injection for the kbac Neo4j knowledge base",
+  "author": {
+    "name": "austyle-io",
+    "url": "https://github.com/austyle-io"
+  },
+  "homepage": "https://github.com/austyle-io/austdx-cc-mkpl",
+  "repository": "https://github.com/austyle-io/austdx-cc-mkpl",
+  "license": "MIT",
+  "keywords": ["neo4j", "cypher", "knowledge-graph", "typebox", "graph-database"]
+}

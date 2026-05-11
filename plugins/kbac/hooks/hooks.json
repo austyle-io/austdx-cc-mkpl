@@ -1,0 +1,17 @@
+{
+  "description": "kbac graph context injection — injects schema summary and CLI tools into every session",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tsx ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/kbac-session-context.ts",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}
