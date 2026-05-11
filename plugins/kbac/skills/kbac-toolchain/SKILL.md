@@ -16,7 +16,7 @@ description: >
 kbac uses modern Rust-based CLI tools for code search, file discovery, text
 replacement, and structured data processing. For general tool installation,
 syntax divergences, and anti-patterns, see the
-[`modern-unix-tools`](../../modern-unix-tools/skills/modern-unix-tools/SKILL.md)
+[`modern-unix-tools`](../../../modern-unix-tools/skills/modern-unix-tools/SKILL.md)
 plugin — this skill covers only **kbac-specific usage patterns**.
 
 ## Quick Detection
