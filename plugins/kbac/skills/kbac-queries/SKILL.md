@@ -104,11 +104,15 @@ RETURN node { .*, _score: score } AS result
 ORDER BY score DESC LIMIT 10;
 
 -- Cross-label search (UNION required — fulltext indexes are single-label)
-CALL db.index.fulltext.queryNodes('tool_search', $term) YIELD node, score
-RETURN node { .* } AS result, score, labels(node)[0] AS label
-UNION
-CALL db.index.fulltext.queryNodes('concept_search', $term) YIELD node, score
-RETURN node { .* } AS result, score, labels(node)[0] AS label
+-- Wrap UNION in CALL { … } for explicit post-union ordering (Neo4j Cypher Manual: Combined queries)
+CALL {
+  CALL db.index.fulltext.queryNodes('tool_search', $term) YIELD node, score
+  RETURN node { .* } AS result, score, labels(node)[0] AS label
+  UNION
+  CALL db.index.fulltext.queryNodes('concept_search', $term) YIELD node, score
+  RETURN node { .* } AS result, score, labels(node)[0] AS label
+}
+RETURN result, score, label
 ORDER BY score DESC;
 ```
 

@@ -60,7 +60,9 @@ Run this one-liner to check all required tools:
 for tool in node yarn docker "docker compose" op tsx; do
   cmd=$(echo "$tool" | awk '{print $1}')
   if command -v "$cmd" &>/dev/null; then
-    printf "✓ %-16s %s\n" "$tool" "$($tool version 2>/dev/null || $tool -v 2>/dev/null || $tool --version 2>/dev/null | head -1)"
+    # NOTE: --version first; `$tool version` is destructive for Yarn Berry
+    # (it bumps package.json), so it stays last as a fallback only.
+    printf "✓ %-16s %s\n" "$tool" "$($tool --version 2>/dev/null || $tool -v 2>/dev/null || $tool version 2>/dev/null | head -1)"
   else
     printf "✗ %-16s NOT INSTALLED\n" "$tool"
   fi
@@ -133,7 +135,8 @@ npx varlock run -- sh -c 'cypher-shell -a bolt://localhost:7688 -u neo4j -p "$NE
 ```
 
 Expected node count output (approximate):
-```
+
+```text
 label    | count
 ---------+------
 Concept  | 8

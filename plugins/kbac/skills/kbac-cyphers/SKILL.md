@@ -77,7 +77,7 @@ SET r.role = 'graph-storage';
 
 Seed files follow numbered sequential naming in `cypher/`:
 
-```
+```text
 00-smoke-test.cypher        — Cypher 25 + APOC validation
 01-constraints.cypher       — Uniqueness constraints on node .id
 02-indexes.cypher           — Range, composite, fulltext indexes

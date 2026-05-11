@@ -23,7 +23,7 @@ kbac uses TypeBox schemas as the single source of truth for both compile-time Ty
 
 ## Schema-First Pipeline
 
-```
+```text
 TypeBox Schema  →  Static<typeof Schema>  →  createValidator(Schema)
    (source)         (compile-time type)       (runtime AJV validator)
 ```

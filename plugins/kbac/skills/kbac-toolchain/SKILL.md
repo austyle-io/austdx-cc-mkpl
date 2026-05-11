@@ -64,6 +64,7 @@ rg -F 'Type.Object({' src/schemas/
 ```
 
 Legacy equivalent (when rg unavailable):
+
 ```bash
 grep -rn 'MERGE' cypher/
 ```
@@ -88,6 +89,7 @@ fd -e cypher -x wc -l {}
 ```
 
 Legacy equivalent:
+
 ```bash
 find . -name '*.cypher' -type f
 ```
@@ -108,9 +110,15 @@ sd 'version: "\d+\.\d+\.\d+"' 'version: "2.0.0"' cypher/06-seed-systems.cypher
 cat src/schemas/nodes.ts | sd 'ToolSchema' 'InstrumentSchema'
 ```
 
-Legacy equivalent:
+Legacy equivalent (portable across GNU and BSD/macOS sed):
+
 ```bash
-sed -i '' 's/oldPropName/newPropName/g' src/schemas/*.ts
+# Detect sed flavor; GNU sed rejects `sed -i ''`, BSD/macOS sed requires it.
+if sed --version >/dev/null 2>&1; then
+  sed -i    's/oldPropName/newPropName/g' src/schemas/*.ts  # GNU sed
+else
+  sed -i '' 's/oldPropName/newPropName/g' src/schemas/*.ts  # BSD/macOS sed
+fi
 ```
 
 ### JSON Processing — jq
@@ -183,8 +191,10 @@ replace_text() {
   local from="$1" to="$2" file="$3"
   if command -v sd &>/dev/null; then
     sd "$from" "$to" "$file"
+  elif sed --version >/dev/null 2>&1; then
+    sed -i    "s/$from/$to/g" "$file"   # GNU sed (Linux)
   else
-    sed -i '' "s/$from/$to/g" "$file"
+    sed -i '' "s/$from/$to/g" "$file"   # BSD/macOS sed
   fi
 }
 ```

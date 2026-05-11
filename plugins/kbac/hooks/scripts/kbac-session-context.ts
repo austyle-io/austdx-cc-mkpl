@@ -1,3 +1,20 @@
+/**
+ * kbac SessionStart hook.
+ *
+ * Collects schema, seed, query, and CLI-tool context from the surrounding
+ * kbac project and emits a Claude Code `SessionStart` hook payload on stdout.
+ * Inputs come from the project layout (`src/schemas/`, `cypher/`,
+ * `cypher/queries/`) and from `$PATH` (modern CLI tool detection).
+ *
+ * The output payload is validated against {@link HookOutputSchema} before
+ * being printed so malformed hook payloads cannot reach Claude Code.
+ *
+ * Environment variables consumed:
+ * - `CLAUDE_PLUGIN_ROOT` — absolute path to the plugin root (provided by
+ *   Claude Code; falls back to the script's `../..`).
+ * - `CLAUDE_PROJECT_DIR` — absolute path to the user's project (falls back
+ *   to two directories above the plugin root).
+ */
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { execFileSync } from "node:child_process";
@@ -5,8 +22,14 @@ import { fileURLToPath } from "node:url";
 import { Type, type Static } from "typebox";
 import Ajv from "ajv";
 
-// ── Schemas ──────────────────────────────────────────────────
+// ── Schemas ─────────────────────────────────
 
+/**
+ * Shape of the graph context that the hook collects from the kbac project.
+ *
+ * Each array is populated independently and may be empty when the
+ * corresponding source (schemas, cypher files, tools) is missing.
+ */
 const GraphContextSchema = Type.Object({
   nodeSchemas: Type.Array(Type.String()),
   relationshipSchemas: Type.Array(Type.String()),
@@ -16,6 +39,12 @@ const GraphContextSchema = Type.Object({
 });
 type GraphContext = Static<typeof GraphContextSchema>;
 
+/**
+ * Shape of the SessionStart hook payload accepted by Claude Code.
+ *
+ * `additionalContext` is a non-empty human-readable summary that Claude
+ * sees at the start of the session.
+ */
 const HookOutputSchema = Type.Object({
   hookSpecificOutput: Type.Object({
     hookEventName: Type.Literal("SessionStart"),
@@ -24,7 +53,7 @@ const HookOutputSchema = Type.Object({
 });
 type HookOutput = Static<typeof HookOutputSchema>;
 
-// ── Path resolution ──────────────────────────────────────────
+// ── Path resolution ─────────────────────────────
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const pluginRoot =
@@ -35,8 +64,18 @@ const projectDir =
 const schemasDir = join(projectDir, "src", "schemas");
 const cypherDir = join(projectDir, "cypher");
 
-// ── Data collectors ──────────────────────────────────────────
+// ── Data collectors ─────────────────────────────
 
+/**
+ * Extracts the names of TypeBox object schemas declared in a TypeScript file.
+ *
+ * Matches the source-level pattern `export const <Name> = Type.Object` so it
+ * works without a TypeScript parser. Returns an empty array if the file
+ * does not exist, allowing the hook to remain best-effort on partial setups.
+ *
+ * @param filePath Absolute path to a `.ts` file expected to declare schemas.
+ * @returns Schema identifier names in declaration order; empty if none found.
+ */
 function extractSchemaNames(filePath: string): string[] {
   if (!existsSync(filePath)) return [];
   const content = readFileSync(filePath, "utf-8");
@@ -46,6 +85,16 @@ function extractSchemaNames(filePath: string): string[] {
   );
 }
 
+/**
+ * Lists `.cypher` files directly inside a directory (non-recursive).
+ *
+ * Results are sorted lexicographically so numbered seed files appear in
+ * their execution order. Returns an empty array if the directory does not
+ * exist.
+ *
+ * @param dir Absolute path to a directory that may contain `.cypher` files.
+ * @returns Sorted list of basenames ending in `.cypher`.
+ */
 function listCypherFiles(dir: string): string[] {
   if (!existsSync(dir)) return [];
   return readdirSync(dir)
@@ -53,6 +102,15 @@ function listCypherFiles(dir: string): string[] {
     .sort();
 }
 
+/**
+ * Detects which modern CLI tools are available on `$PATH`.
+ *
+ * Probes `rg`, `fd`, `sd`, `jq`, and `yq` via `which`. Anything missing is
+ * silently dropped so the hook never fails on a partially-configured
+ * machine; downstream consumers should treat the result as a hint.
+ *
+ * @returns Names of detected tools, in the canonical probe order.
+ */
 function detectCliTools(): string[] {
   return ["rg", "fd", "sd", "jq", "yq"].filter((tool) => {
     try {
