@@ -12,21 +12,22 @@
     {
       "name": "modern-unix-tools",
       "source": "./plugins/modern-unix-tools",
-      "description": "Teaches Claude to prefer modern Rust/Go/C++ replacements (ripgrep, fd, sd, bat, eza, zoxide, dust, hyperfine, tokei, delta, etc.) over classic Unix tools (grep, find, sed, cat, ls, cd, du, time, wc) with syntax divergence cheatsheets and anti-patterns.",
+      "description": "Teaches Claude to prefer modern Rust/Go/C++ replacements for classic Unix tools. Includes a skill with full mapping (ripgrep/fd/sd/bat/eza/zoxide/dust/delta/hyperfine/tokei/grex/tealdeer/watchexec/just/jq/yq) and syntax divergence cheatsheets.",
       "version": "0.1.0",
       "author": {
-        "name": "austyle-io"
+        "name": "austyle-io",
+        "url": "https://github.com/austyle-io"
       },
       "license": "MIT",
       "keywords": [
         "unix",
         "cli",
         "rust",
+        "modern-tooling",
+        "developer-experience",
         "ripgrep",
         "fd",
-        "sd",
-        "developer-experience",
-        "modern-tooling"
+        "sd"
       ],
       "category": "developer-experience",
       "tags": ["cli-tools", "rust", "modernization", "skill"]
@@ -37,7 +38,8 @@
       "description": "Knowledge graph development toolkit — Cypher authoring guidance, TypeBox schema patterns, graph query design, and session context injection for the kbac Neo4j knowledge base",
       "version": "0.1.2",
       "author": {
-        "name": "austyle-io"
+        "name": "austyle-io",
+        "url": "https://github.com/austyle-io"
       },
       "license": "MIT",
       "keywords": [
