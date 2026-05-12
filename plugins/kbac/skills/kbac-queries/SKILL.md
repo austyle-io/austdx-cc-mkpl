@@ -150,6 +150,7 @@ The service layer handles:
 # Execute a query template file
 yarn cypher cypher/queries/lookup.cypher
 
-# Ad-hoc query via cypher-shell
-npx varlock run -- sh -c 'cypher-shell -a bolt://localhost:7688 -u neo4j -p "$NEO4J_PASSWORD" "MATCH (t:Tool) RETURN t.name LIMIT 5;"'
+# Ad-hoc query via cypher-shell (sources .env first)
+set -a; source .env; set +a
+cypher-shell -a "$NEO4J_URI" -u "$NEO4J_USERNAME" -p "$NEO4J_PASSWORD" "MATCH (t:Tool) RETURN t.name LIMIT 5;"
 ```

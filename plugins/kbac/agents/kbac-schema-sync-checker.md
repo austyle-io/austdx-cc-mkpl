@@ -53,13 +53,13 @@ You are a schema validation specialist for the kbac knowledge graph. Your job is
 
 1. Read `src/schemas/nodes.ts` — extract all schema definitions and their properties
 2. Read `src/schemas/relationships.ts` — extract relationship schema definitions
-3. Attempt live introspection **[auth]**:
+3. Attempt live introspection:
 
    ```bash
    yarn db:introspect
    ```
 
-   **Note:** This command runs via `varlock run` and triggers 1Password biometric auth. Claude cannot complete biometric prompts — the user must run this manually (e.g. via `!` prefix in Claude Code). If the command fails or is unavailable, proceed with static analysis (step 4).
+   This command reads credentials from `.env` (or shell env if `.env` is absent). If `.env` is missing or `NEO4J_PASSWORD` is unset, the command fails fast with a clear error — proceed with static analysis (step 4).
 4. **Fallback — static analysis:** Read all seed files in `cypher/` to extract:
    - Node labels and properties from MERGE/SET statements
    - Relationship types and properties from MERGE/SET statements
@@ -95,5 +95,5 @@ X/Y schemas in sync. Z issues found.
 **Important Constraints:**
 
 - If `yarn db:introspect` fails, clearly state you are using static analysis only and recommend the user run introspection manually for full verification
-- Never attempt to resolve 1Password credentials or run `varlock` commands beyond `yarn db:introspect`
+- Do not attempt to modify `.env` or other credential storage
 - Prefer reading seed files over ad-hoc cypher-shell queries for static analysis

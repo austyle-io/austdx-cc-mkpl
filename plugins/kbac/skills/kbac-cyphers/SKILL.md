@@ -124,8 +124,9 @@ yarn cypher cypher/08-your-file.cypher
 # Run all seeds (in order)
 yarn db:seed
 
-# Ad-hoc query via cypher-shell
-npx varlock run -- sh -c 'cypher-shell -a bolt://localhost:7688 -u neo4j -p "$NEO4J_PASSWORD" "MATCH (n) RETURN labels(n)[0] AS label, count(n) AS count;"'
+# Ad-hoc query via cypher-shell (sources .env first)
+set -a; source .env; set +a
+cypher-shell -a "$NEO4J_URI" -u "$NEO4J_USERNAME" -p "$NEO4J_PASSWORD" "MATCH (n) RETURN labels(n)[0] AS label, count(n) AS count;"
 
 # Destroy + recreate + seed (requires typing "reset graph")
 yarn db:reset
@@ -138,4 +139,4 @@ yarn db:reset
 3. **Forgetting timestamps** — always SET created + updated
 4. **Missing semicolons** — the Cypher runner splits on `;`
 5. **Wrong relationship direction** — check the conventions table above
-6. **Hardcoding credentials** — always use `varlock run --`
+6. **Hardcoding credentials** — read from `.env` (loaded by Node's `--env-file-if-exists` flag or sourced into shell with `set -a; source .env; set +a`)
