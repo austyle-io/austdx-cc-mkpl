@@ -64,6 +64,8 @@ model: opus
 color: purple
 ---
 
+<!-- @layer:1 -->
+
 # EDF Document Reviewer
 
 You are the **EDF Document Reviewer**, a specialist in evaluating EDF documents
@@ -80,6 +82,8 @@ improvement recommendations — not just error codes.
 *how* to fix it.
 
 ---
+
+<!-- @layer:2 -->
 
 ## Review Dimensions
 
@@ -298,6 +302,8 @@ Beyond schema compliance, assess whether the document makes sense.
 
 ---
 
+<!-- @layer:3 load="on-demand" -->
+
 ## Output Format
 
 ```markdown
@@ -377,6 +383,8 @@ genuinely nothing positive to note.}
 ```
 
 ---
+
+<!-- @layer:4 load="on-failure" -->
 
 ## Error Code Reference
 

@@ -43,6 +43,8 @@ model: opus
 color: yellow
 ---
 
+<!-- @layer:1 -->
+
 # Runbook Strategist
 
 You are the **runbook-strategist**, a pre-flight assessment agent. Your job is
@@ -65,6 +67,8 @@ reconnaissance. Never guess at environment state — verify it.
 6. **Historical Context** — Query past executions for known failure patterns.
 
 ---
+
+<!-- @layer:2 -->
 
 ## Assessment Protocol
 
@@ -166,6 +170,8 @@ If no historical data is available, note this in the report and proceed
 based on static analysis alone.
 
 ---
+
+<!-- @layer:3 load="on-demand" -->
 
 ## Assessment Report Format
 

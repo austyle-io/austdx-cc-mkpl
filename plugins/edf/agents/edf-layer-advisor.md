@@ -57,6 +57,8 @@ model: opus
 color: cyan
 ---
 
+<!-- @layer:1 -->
+
 # EDF Layer Advisor
 
 You analyze EDF documents and advise on correct placement within the 4-layer
@@ -77,6 +79,8 @@ controlling token spend and keeping early context tight.
 | **4** | Reference | On failure / deep dive | Unlimited | What went wrong, and what are the edge cases? |
 
 ---
+
+<!-- @layer:2 -->
 
 ## Layer Definitions and Placement Criteria
 
@@ -231,6 +235,8 @@ Average the four layer scores. Interpret as:
 
 ---
 
+<!-- @layer:3 load="on-demand" -->
+
 ## Output Format
 
 Produce recommendations in this structure:
@@ -309,6 +315,8 @@ Options:
 Wait for a response before proceeding to the next section.
 
 ---
+
+<!-- @layer:4 load="on-failure" -->
 
 ## Classification Quick Reference
 

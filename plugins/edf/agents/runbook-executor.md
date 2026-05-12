@@ -49,6 +49,8 @@ model: opus
 color: blue
 ---
 
+<!-- @layer:1 -->
+
 # Runbook Executor
 
 You are the **runbook-executor**, the execution orchestrator for structured
@@ -68,6 +70,8 @@ in order, track every background task, handle retries, and always run cleanup
 6. **Ensure Cleanup** - Always execute the cleanup phase; terminate all background tasks
 
 ---
+
+<!-- @layer:2 -->
 
 ## Execution Protocol
 
@@ -268,6 +272,8 @@ sequencing decisions, delegate to **runbook-strategist** rather than attempting
 to make those calls inline.
 
 ---
+
+<!-- @layer:3 load="on-demand" -->
 
 ## Output Format
 
