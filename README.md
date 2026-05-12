@@ -14,23 +14,56 @@ More plugins to come.
 
 ## Use it
 
-Add this marketplace to Claude Code:
+Two surfaces are available: the slash commands inside an active Claude Code
+session, and the `claude plugin` subcommand from your terminal. Marketplace
+add/list/update/remove are slash-only; plugin install/update/uninstall/list
+work from both.
+
+### Inside Claude Code (slash commands)
 
 ```bash
+# Add this marketplace
 /plugin marketplace add austyle-io/austdx-cc-mkpl
-```
 
-Then install any plugin:
+# Install a plugin
+/plugin install edf@austdx-cc-mkpl
 
-```bash
-/plugin install modern-unix-tools@austdx-cc-mkpl
-```
+# Update an installed plugin
+/plugin update edf@austdx-cc-mkpl
 
-To update after the marketplace publishes new versions:
-
-```bash
+# Refresh the marketplace catalog
 /plugin marketplace update austdx-cc-mkpl
+
+# Uninstall
+/plugin uninstall edf@austdx-cc-mkpl
+
+# Browse / manage everything via the menu
+/plugin
 ```
+
+After installing or enabling a plugin in-session, run `/reload-plugins` so the
+new commands, agents, and skills register without a session restart.
+
+### From the terminal (`claude plugin` CLI)
+
+```bash
+# Install a plugin (use --scope user|project|local; default is user)
+claude plugin install edf@austdx-cc-mkpl
+
+# List installed plugins (--available --json includes marketplace catalog)
+claude plugin list
+
+# Update an installed plugin
+claude plugin update edf@austdx-cc-mkpl
+
+# Uninstall (--prune drops orphaned dependencies)
+claude plugin uninstall edf@austdx-cc-mkpl
+```
+
+Marketplace add/list/update/remove are not exposed as `claude` CLI subcommands
+— do those from the slash surface above. Marketplace name is the `name` field
+in `.claude-plugin/marketplace.json` (`austdx-cc-mkpl`), not the GitHub repo
+slug.
 
 ## Repository layout
 
