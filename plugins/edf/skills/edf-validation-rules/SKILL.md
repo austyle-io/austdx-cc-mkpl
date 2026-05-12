@@ -68,6 +68,26 @@ migration regardless of component type. The `edf-validate` CLI flags them.
 | -------- | ---------------------------------------------------------------- |
 | `model:` | Valid on agent files only. Skills and commands must not declare it. |
 
+### Runbook frontmatter (separate from component types)
+
+Runbooks are runtime-execution artifacts, **not** EDF components. The
+forbidden-fields rule above applies only to the component-type table at
+the top of this skill (`agent`, `skill`, `command`, `hook`). Runbooks
+have their own frontmatter shape and may carry these fields:
+
+| Field                | Type   | Notes                                                     |
+| -------------------- | ------ | --------------------------------------------------------- |
+| `name`               | string | kebab-case, must match the runbook's filename             |
+| `type`               | string | Always literal `runbook`                                  |
+| `version`            | string | Semantic version (e.g. `"1.0.0"`). Permitted on runbooks. |
+| `description`        | string | What the runbook does and when to run it                  |
+| `tags`               | list   | Searchable tags                                           |
+| `estimated_duration` | string | e.g. `15m`, `1h`                                          |
+
+For the canonical runbook-authoring guidance see the `runbook-authoring`
+skill. The `edf-validate` CLI does not lint runbook frontmatter today;
+treat the table above as a documented contract.
+
 ## Semantic XML Tags
 
 EDF documents use a small set of semantic tags inside the markdown body.
