@@ -276,6 +276,8 @@ Once resolved, dispatch runbook-executor and monitor Phase 3 closely.
 
 ---
 
+<!-- @layer:4 load="on-failure" -->
+
 ## Analysis Patterns
 
 ### Dependency Graph Analysis
