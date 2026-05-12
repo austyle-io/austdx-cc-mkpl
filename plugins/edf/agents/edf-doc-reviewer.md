@@ -159,14 +159,9 @@ marked by HTML comments. The Claude Code runtime loads each layer on demand
 to control context size. Misplaced content causes either token waste (heavy
 content loaded eagerly) or behavioral gaps (essential rules loaded too late).
 
-**Layer reference**:
-
-| Layer | Marker | Loaded when | Typical size | Contains |
-|-------|--------|-------------|--------------|----------|
-| **1** | `<!-- @layer:1 -->` | Always | ~200 tokens | Identity, summary, goal, triggers |
-| **2** | `<!-- @layer:2 -->` | On task match | ~600–1000 tokens | Rules, decision logic, primary workflows |
-| **3** | `<!-- @layer:3 load="on-demand" -->` | On model request | ~800–1500 tokens | Worked examples, advanced patterns |
-| **4** | `<!-- @layer:4 load="on-failure" -->` | After error | ~1000+ tokens | Troubleshooting, edge cases, debugging |
+See the `edf-validation-rules` skill — *Layer definitions* table (and the
+*Layer content rules* immediately following) — for the canonical marker
+syntax, load conditions, token budgets, and per-layer content guidance.
 
 **Review criteria**:
 - Layer 1 is mandatory for every EDF document. Layers 2–4 are optional but,
