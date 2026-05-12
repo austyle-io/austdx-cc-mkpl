@@ -49,6 +49,28 @@
       ],
       "category": "developer-experience",
       "tags": ["knowledge-graph", "neo4j", "cypher", "typebox", "skill", "agent", "hook"]
+    },
+    {
+      "name": "edf",
+      "source": "./plugins/edf",
+      "description": "Enhanced Document Format toolkit — agents and skills for EDF document authoring, validation, runbook orchestration (executor + strategist), decision-tree patterns, workflow design, and EDF-specific Neo4j Cypher patterns. Companion plugin to the @austyle-io/edf TypeScript library.",
+      "version": "0.1.0",
+      "author": {
+        "name": "austyle-io"
+      },
+      "license": "MIT",
+      "keywords": [
+        "edf",
+        "runbook",
+        "decision-tree",
+        "workflow",
+        "checklist",
+        "orchestration",
+        "validation",
+        "templates"
+      ],
+      "category": "developer-experience",
+      "tags": ["edf", "runbook", "orchestration", "decision-tree", "workflow", "agent", "skill"]
     }
   ]
 }

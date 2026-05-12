@@ -1,0 +1,24 @@
+{
+  "name": "edf",
+  "version": "0.1.0",
+  "description": "Enhanced Document Format toolkit — agents and skills for EDF document authoring, validation, runbook orchestration (executor + strategist), decision-tree patterns, workflow design, and EDF-specific Neo4j Cypher patterns. Companion plugin to the @austyle-io/edf TypeScript library.",
+  "author": {
+    "name": "austyle-io",
+    "url": "https://github.com/austyle-io"
+  },
+  "homepage": "https://github.com/austyle-io/austdx-cc-mkpl",
+  "repository": "https://github.com/austyle-io/austdx-cc-mkpl",
+  "license": "MIT",
+  "keywords": [
+    "edf",
+    "runbook",
+    "decision-tree",
+    "workflow",
+    "checklist",
+    "orchestration",
+    "validation",
+    "templates",
+    "skill",
+    "agent"
+  ]
+}
