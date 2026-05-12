@@ -190,9 +190,13 @@ syntax, load conditions, token budgets, and per-layer content guidance.
    filter for EDF frontmatter presence. For plugin-scope audits, defer to the
    `plugin-edf-audit` skill.
 
-2. **Run the `edf-validate` CLI** to capture raw error codes:
+2. **Run the `edf-validate` CLI** to capture raw error codes. The validator
+   lives in the companion `austyle-io/edf` repository, so `cd` there first
+   (the `src/validator/cli.ts` path resolves relative to that repo, not this
+   plugin):
 
    ```bash
+   cd /path/to/austyle-io/edf
    yarn tsx src/validator/cli.ts <path>            # validate a directory
    yarn tsx src/validator/cli.ts --file <path>     # validate a single file
    ```

@@ -33,8 +33,8 @@ Invoke `runbook-executor` via this skill when the user signals any of:
   deployment workflow".
 - **Workflow execution** — "start integration test", "run the pre-release
   checklist", "execute the migration steps".
-- **Cleanup-critical operations** — anything where the user wants
-  guaranteed cleanup even after failure ("run integration tests and make
+- **Cleanup-critical operations** — anything where the user wants cleanup
+  to be guaranteed even after failure ("run integration tests and make
   sure cleanup happens").
 
 Do **not** invoke for:
@@ -65,7 +65,7 @@ Do **not** invoke for:
    available runbooks and ask the user to disambiguate before dispatching:
 
    ```bash
-   rg --files -g "**/runbooks/*.md" 2>/dev/null | grep -v README
+   rg --files -g "**/runbooks/*.md" 2>/dev/null | grep -vE '/README(\.md)?$'
    ```
 
 2. **Dispatch `runbook-executor`** via the Agent tool (`Task` is the legacy alias). Pass the runbook

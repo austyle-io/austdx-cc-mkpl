@@ -213,7 +213,7 @@ const memories = await mcp__neo4j_memory__search_memories({
 
 ## Clause Order Reminder
 
-```
+```text
 MATCH       pattern to find
 WHERE       filter conditions
 WITH        intermediate projection / aggregation
