@@ -38,6 +38,7 @@ description: >
   </commentary>
   </example>
 
+tools: [Read, Bash, Glob, Grep]
 model: opus
 color: yellow
 ---

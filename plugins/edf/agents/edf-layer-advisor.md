@@ -52,6 +52,7 @@ description: >
   its reasoning.
   </commentary>
   </example>
+tools: [Read, Bash, Grep]
 model: opus
 color: cyan
 ---

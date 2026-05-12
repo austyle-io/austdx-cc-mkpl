@@ -33,6 +33,7 @@ description: >
   Decision-tree documents are a first-class EDF doc type; the agent knows the embed syntax.
   </commentary>
   </example>
+tools: [Read, Write, Edit, Glob, Grep]
 model: opus
 color: green
 ---

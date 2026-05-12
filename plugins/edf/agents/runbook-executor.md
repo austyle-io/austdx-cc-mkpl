@@ -44,6 +44,7 @@ description: >
   </commentary>
   </example>
 
+tools: [Read, Bash, Glob, Grep, Edit]
 model: opus
 color: blue
 ---

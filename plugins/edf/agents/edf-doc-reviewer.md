@@ -59,6 +59,7 @@ description: >
   and surfaces systemic issues.
   </commentary>
   </example>
+tools: [Read, Bash, Glob, Grep]
 model: opus
 color: purple
 ---
