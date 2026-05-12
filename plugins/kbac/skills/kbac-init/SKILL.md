@@ -145,6 +145,75 @@ System   | 1
 Tool     | 13
 ```
 
+### Phase 5: CLI Path Setup [auto]
+
+Installs the `kbac` command on `$PATH` by symlinking the repository's
+`bin/kbac` wrapper into `~/.local/bin`. This enables the `/kbac` slash
+command and lets you use `kbac` interactively from any terminal.
+
+Run this phase only after Phase 4 verification succeeds, so the binary
+you're symlinking is already known to work.
+
+#### Steps
+
+1. **Decide the repo path.** If `$KBAC_PROJECT_PATH` is set in your
+   shell and points to a valid kbac repo, that wins. Otherwise the
+   skill calls `AskUserQuestion` with the default `~/Github/kbac` to
+   confirm or override.
+
+2. **Validate.** The resolved path must contain `bin/kbac` (executable),
+   `package.json`, and `cypher/`. If any check fails, the skill reports
+   which one and loops back to step 1. The `resolveKbacPath` helper in
+   `plugins/kbac/lib/resolve-kbac-path.ts` encodes the same validation
+   so the plugin and the init skill agree.
+
+3. **Check for a stale symlink.** If `~/.local/bin/kbac` already exists
+   and points elsewhere, the skill shows the current target and
+   confirms overwrite via `AskUserQuestion` before clobbering.
+
+4. **Install the symlink.**
+
+   ```bash
+   ln -sf "$KBAC_REPO/bin/kbac" ~/.local/bin/kbac
+   ```
+
+5. **Persist the path** to the plugin's local settings file so other
+   parts of the plugin can self-heal if the symlink is lost:
+
+   ```bash
+   mkdir -p "$CLAUDE_PLUGIN_ROOT/.claude"
+   cat > "$CLAUDE_PLUGIN_ROOT/.claude/kbac.local.md" <<EOF
+   ---
+   kbac_path: $KBAC_REPO
+   ---
+   EOF
+   ```
+
+6. **Smoke-test the symlink** (must run *before* declaring success):
+
+   ```bash
+   kbac --version
+   ```
+
+   Expected: non-empty version line, exit 0. On failure, remove the
+   symlink and report the underlying error.
+
+7. **Verify `~/.local/bin` is on `$PATH`.** If not, surface the exact
+   line the user should add to `~/.zshrc` themselves:
+
+   ```bash
+   echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+   ```
+
+   Do not modify `~/.zshrc` automatically — surface the line and let
+   the user decide.
+
+#### Auth boundary
+
+This phase is `[auto]` — no biometric required. The smoke test in
+step 6 invokes `kbac --version`, which does not connect to Neo4j and
+does not need varlock-resolved credentials.
+
 ## Port Configuration
 
 kbac uses offset ports to avoid conflict with other Neo4j instances:
