@@ -229,8 +229,8 @@ Recommended Approach: STAGED EXECUTION
    - Start backend API: `make dev/up`
    - Free port 8080: `kill $(lsof -t -i:8080)`
 
-2. EXECUTE (via runbook-executor)
-   - Dispatch the runbook-executor agent (e.g., via the `runbook-run`
+2. EXECUTE (via `runbook-executor`)
+   - Dispatch the `runbook-executor` agent (e.g., via the `runbook-run`
      skill, or directly: "run the docker-backend-integration runbook")
    - Estimated time: 15-20 minutes
 
