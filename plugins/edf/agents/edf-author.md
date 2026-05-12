@@ -144,7 +144,7 @@ EDF documents are consumed by:
 3. Add frontmatter — derive `name` from filename, `description` from intro paragraph
 4. Wrap sections with semantic tags from the vocabulary above
 5. Extract `if/then` logic into embedded `decision_tree` YAML blocks
-6. Add `<!-- Layer N: Name -->` markers and `---` separators
+6. Add `<!-- @layer:N -->` markers (with `load="on-demand"` / `load="on-failure"` for layers 3 and 4) separated by `---` horizontal rules
 7. Validate: all tags closed, Layer 1 under 500 tokens, refs plausible
 
 Preserve all factual content verbatim — only restructure the presentation.
