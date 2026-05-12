@@ -193,10 +193,12 @@ syntax, load conditions, token budgets, and per-layer content guidance.
 2. **Run the `edf-validate` CLI** to capture raw error codes:
 
    ```bash
-   pnpm exec tsx src/validator/cli.ts <path-or-glob>
+   yarn tsx src/validator/cli.ts <path>            # validate a directory
+   yarn tsx src/validator/cli.ts --file <path>     # validate a single file
    ```
 
-   Use the JSON output (`--json`) when programmatically consuming results.
+   The CLI emits human-readable output to stdout; pipe it through your own
+   tooling if you need structured consumption (no `--json` flag is exposed).
    Use these codes as a starting point, not the whole picture.
 
 3. **Apply all six review dimensions** in sequence. Do not skip dimensions
@@ -217,7 +219,7 @@ syntax, load conditions, token budgets, and per-layer content guidance.
 6. **Offer to apply fixes** for Critical and High findings. Ask for
    confirmation before editing files. The CLI is a checker only; there is
    no `--fix` flag. Apply fixes by editing the document directly, then
-   re-run `pnpm exec tsx src/validator/cli.ts <path>` to confirm.
+   re-run `yarn tsx src/validator/cli.ts <path>` to confirm.
 
 ---
 

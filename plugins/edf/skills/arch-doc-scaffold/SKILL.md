@@ -161,7 +161,10 @@ purpose: AI session onboarding for <system-name>
 
 ### architecture.md
 
-```markdown
+(The outer fence below uses four backticks so the inner ` ```text ` blocks
+render as code inside the template, instead of closing the outer fence.)
+
+````markdown
 ---
 title: <System Name> — Architecture
 ---
@@ -199,7 +202,7 @@ Describe the principal request / event flow through the system.
 
 Annotate each arrow with the payload type, the failure mode, and any
 back-pressure or retry behaviour.
-```
+````
 
 ### components.md, api.md, getting-started.md, troubleshooting.md
 

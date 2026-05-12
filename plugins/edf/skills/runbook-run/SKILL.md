@@ -68,7 +68,7 @@ Do **not** invoke for:
    rg --files -g "**/runbooks/*.md" 2>/dev/null | grep -v README
    ```
 
-2. **Dispatch `runbook-executor`** via the Task tool. Pass the runbook
+2. **Dispatch `runbook-executor`** via the Agent tool (`Task` is the legacy alias). Pass the runbook
    path and the execution protocol expectations:
 
    ```text

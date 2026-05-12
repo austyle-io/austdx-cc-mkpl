@@ -11,6 +11,8 @@ description: >
   `edf-stats` instead — this skill produces qualitative findings.
 ---
 
+<!-- @layer:1 -->
+
 # Plugin EDF Audit
 
 Audits a Claude Code plugin (one plugin or a whole marketplace) for EDF
@@ -72,8 +74,12 @@ follows so findings are easy to triage.
 - [ ] Type-specific required fields present (e.g., agent `tools`, `model`)
 - [ ] `name` matches the file/directory name
 - [ ] `description` starts with "Use when…" (modern skill convention)
-- [ ] No deprecated fields (`edf:`, `related:`, `version:`, `hero:`,
-  `<example>` blocks) on modern components
+- [ ] No deprecated frontmatter fields (`edf:`, `related:`, `hero:`) and
+  no `version:` on component docs (agent/skill/command/hook); runbooks
+  carry their own frontmatter shape and may keep `version:` and `type:`
+- [ ] Note: `<example>` blocks in agent prose are valid and shipped on
+  every agent in this plugin — the validator does not flag them, only
+  malformed-tag leftovers count as warnings
 - [ ] `allowed-tools` only present where it shapes execution
 - [ ] No empty string or `null` for required string fields
 

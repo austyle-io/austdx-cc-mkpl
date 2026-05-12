@@ -67,7 +67,7 @@ This plugin is meant to be installed through the parent marketplace:
 ```
 
 Once installed, the skills become slash-invocable (e.g. `/edf-validate`) and
-the agents are dispatchable via the Task tool.
+the agents are dispatchable via the Agent tool (`Task` is the legacy alias).
 
 ## Validation
 
@@ -75,7 +75,7 @@ The plugin's documents validate cleanly against the `@austyle-io/edf` CLI:
 
 ```bash
 cd /path/to/@austyle-io/edf
-pnpm exec tsx src/validator/cli.ts /path/to/this/plugin
+yarn tsx src/validator/cli.ts /path/to/this/plugin
 ```
 
 The validator emits `EDF001`–`EDF005` for errors and `W*` for warnings.

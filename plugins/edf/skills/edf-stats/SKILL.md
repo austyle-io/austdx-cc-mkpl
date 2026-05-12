@@ -47,12 +47,10 @@ pnpm dlx tsx /path/to/austyle-io/edf/src/parser/cli.ts stats ./agents
 pnpm dlx tsx /path/to/austyle-io/edf/src/parser/cli.ts stats ./plugins/edf
 ```
 
-If the consumer repo installs `@austyle-io/edf` as a workspace
-dependency, prefer the package binary form:
-
-```bash
-pnpm exec edf-parser stats [path]
-```
+The `@austyle-io/edf` package does not currently expose a `bin` entry
+for the parser CLI; invoke it via the source path above. If a future
+release adds a `bin: { "edf-parser": "..." }` entry, prefer the binary
+form (`yarn edf-parser stats [path]` from the consumer repo).
 
 Default scope is `.` (current working directory) when no path argument
 is supplied. The CLI walks the tree, skipping `node_modules` and

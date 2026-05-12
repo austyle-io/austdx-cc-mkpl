@@ -13,7 +13,7 @@ description: >
 
 # Neo4j Cypher Patterns
 
-Cypher query patterns for the EDF (Engineering Decision Framework) knowledge graph. This skill covers query mechanics specific to EDF entities. For general Cypher authoring — seed files, TypeBox schemas, constraints, indexes — defer to the `kbac` plugin's `kbac-queries`, `kbac-schemas`, and `kbac-cyphers` skills.
+Cypher query patterns for the EDF (Enhanced Document Format) knowledge graph. This skill covers query mechanics specific to EDF entities. For general Cypher authoring — seed files, TypeBox schemas, constraints, indexes — defer to the `kbac` plugin's `kbac-queries`, `kbac-schemas`, and `kbac-cyphers` skills.
 
 ## Three Non-Negotiable Rules
 

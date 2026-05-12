@@ -54,19 +54,19 @@ The validator is a TypeScript CLI run via `tsx`. From the
 ### Directory (recursive)
 
 ```bash
-pnpm exec tsx src/validator/cli.ts /path/to/plugin
+yarn tsx src/validator/cli.ts /path/to/plugin
 ```
 
 ### Single file
 
 ```bash
-pnpm exec tsx src/validator/cli.ts --file /path/to/document.md
+yarn tsx src/validator/cli.ts --file /path/to/document.md
 ```
 
 ### Help
 
 ```bash
-pnpm exec tsx src/validator/cli.ts --help
+yarn tsx src/validator/cli.ts --help
 ```
 
 The validator exits with status 0 when all documents pass and non-zero

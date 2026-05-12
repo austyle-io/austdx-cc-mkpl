@@ -243,9 +243,12 @@ a fixed set of error codes. Quote them verbatim when citing findings.
 | -------- | --------------------------------------------- |
 | `EDF001` | Reference target not found                    |
 | `EDF002` | Circular reference detected                   |
-| `EDF003` | Version constraint not met                    |
 | `EDF004` | Invalid reference format                      |
 | `EDF005` | Neo4j target not in graph                     |
+
+`EDF003` (version constraint not met) is reserved in `src/validator/types.ts`
+but the current shipping CLI does not emit it. Treat it as a doc-only rule
+until a future release wires up version-constraint checking.
 
 Warnings carry free-form `W*` codes (for example `W001`). Treat the code string
 as opaque and quote it as-is.
