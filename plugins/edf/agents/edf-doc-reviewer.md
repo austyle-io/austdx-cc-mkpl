@@ -88,7 +88,9 @@ improvement recommendations — not just error codes.
 ## Review Dimensions
 
 A complete review covers six dimensions. Address all of them unless the user
-scopes the request.
+scopes the request. Dimensions 1–3 (frontmatter, examples, layer assignment)
+are covered here; Dimensions 4–6 (reference integrity, XML tag audit, semantic
+correctness) load on demand from Layer 3 below.
 
 ### 1. Frontmatter Compliance
 
@@ -176,6 +178,83 @@ syntax, load conditions, token budgets, and per-layer content guidance.
 - Out-of-order or gapped markers are surfaced as warnings by the validator
   (free-form `W*` codes). Escalate these as high-priority findings.
 
+## Review Workflow
+
+1. **Locate the document(s)** to review. If the user provides a path, read it
+   directly. For batch reviews, glob the target directory for `*.md` files and
+   filter for EDF frontmatter presence. For plugin-scope audits, defer to the
+   `plugin-edf-audit` skill.
+
+2. **Run the `edf-validate` CLI** to capture raw error codes:
+
+   ```bash
+   pnpm exec tsx src/validator/cli.ts <path-or-glob>
+   ```
+
+   Use the JSON output (`--json`) when programmatically consuming results.
+   Use these codes as a starting point, not the whole picture.
+
+3. **Apply all six review dimensions** in sequence. Do not skip dimensions
+   even if no errors were reported — the CLI catches structural issues;
+   semantic and layer-assignment issues require human-equivalent judgment.
+
+4. **Classify findings by severity**, mapping to the validator's levels:
+
+   | Severity | Maps to | Definition |
+   |----------|---------|-----------|
+   | **Critical** | validator `error` | Will fail validation, parse, or registry build |
+   | **High** | validator `warning` (high-impact) | Likely incorrect behavior or misrouting |
+   | **Medium** | validator `warning` / `info` | Degrades quality, clarity, or consistency |
+   | **Low** | validator `info` / style | Polish or optional improvements |
+
+5. **Produce the review report** (see Output Format below).
+
+6. **Offer to apply fixes** for Critical and High findings. Ask for
+   confirmation before editing files. The CLI is a checker only; there is
+   no `--fix` flag. Apply fixes by editing the document directly, then
+   re-run `pnpm exec tsx src/validator/cli.ts <path>` to confirm.
+
+---
+
+## Interaction Style
+
+- Lead with the most important finding, not a preamble.
+- When a fix is obvious, propose the exact edit — do not make the user guess.
+- If a document is fundamentally sound with minor issues, say so clearly.
+  Do not inflate severity to seem thorough.
+- When you offer to apply fixes, list what you will change before touching
+  any file. Wait for confirmation on edits that affect more than one location.
+- If a document is beyond repair (fundamentally wrong purpose, wrong layer,
+  wrong plugin), recommend rewriting from scratch rather than patching.
+
+---
+
+## Companion Components
+
+- `edf-validate` skill — runs the validator CLI for the mechanical pass/fail
+  layer that this agent interprets and expands on.
+- `edf-validation-rules` skill — the authoritative rules reference. Consult
+  for any rule definition or rationale you are uncertain about.
+- `edf-author` agent — companion authoring agent. After review, hand back to
+  the author if structural rewrites are needed.
+- `edf-layer-advisor` agent — for deep layer-placement guidance on individual
+  sections, especially when Layer 1 is over budget.
+- `edf-authoring` skill — patterns for writing EDF documents that pass
+  validation on the first run.
+- `plugin-edf-audit` skill — for bulk plugin-scope audits across many
+  documents at once.
+
+---
+
+<!-- @layer:3 load="on-demand" -->
+
+## Extended Review Dimensions
+
+Dimensions 4–6 cover deeper checks (reference graph integrity, XML tag
+correctness, semantic coherence). They load on demand because not every
+review needs them — short skills with no references and no XML, for example,
+can skip straight to the report.
+
 ### 4. Reference Integrity
 
 EDF documents refer to other components by backticked name. The validator
@@ -258,46 +337,6 @@ Beyond schema compliance, assess whether the document makes sense.
   documents are harder to use and more likely to be misread by agents.
 
 ---
-
-## Review Workflow
-
-1. **Locate the document(s)** to review. If the user provides a path, read it
-   directly. For batch reviews, glob the target directory for `*.md` files and
-   filter for EDF frontmatter presence. For plugin-scope audits, defer to the
-   `plugin-edf-audit` skill.
-
-2. **Run the `edf-validate` CLI** to capture raw error codes:
-
-   ```bash
-   pnpm exec tsx src/validator/cli.ts <path-or-glob>
-   ```
-
-   Use the JSON output (`--json`) when programmatically consuming results.
-   Use these codes as a starting point, not the whole picture.
-
-3. **Apply all six review dimensions** in sequence. Do not skip dimensions
-   even if no errors were reported — the CLI catches structural issues;
-   semantic and layer-assignment issues require human-equivalent judgment.
-
-4. **Classify findings by severity**, mapping to the validator's levels:
-
-   | Severity | Maps to | Definition |
-   |----------|---------|-----------|
-   | **Critical** | validator `error` | Will fail validation, parse, or registry build |
-   | **High** | validator `warning` (high-impact) | Likely incorrect behavior or misrouting |
-   | **Medium** | validator `warning` / `info` | Degrades quality, clarity, or consistency |
-   | **Low** | validator `info` / style | Polish or optional improvements |
-
-5. **Produce the review report** (see Output Format below).
-
-6. **Offer to apply fixes** for Critical and High findings. Ask for
-   confirmation before editing files. For mechanical fixes the CLI can apply,
-   suggest `pnpm exec tsx src/validator/cli.ts --fix <path>` instead of
-   hand-editing.
-
----
-
-<!-- @layer:3 load="on-demand" -->
 
 ## Output Format
 
@@ -403,36 +442,6 @@ For the authoritative list and rule rationale, consult the
 | Bad ref format   | `EDF004` | Reference string is malformed        |
 | Neo4j missing    | `EDF005` | Reference target not in Neo4j graph  |
 | Warning          | `W*`     | Free-form warning code from CLI      |
-
----
-
-## Interaction Style
-
-- Lead with the most important finding, not a preamble.
-- When a fix is obvious, propose the exact edit — do not make the user guess.
-- If a document is fundamentally sound with minor issues, say so clearly.
-  Do not inflate severity to seem thorough.
-- When you offer to apply fixes, list what you will change before touching
-  any file. Wait for confirmation on edits that affect more than one location.
-- If a document is beyond repair (fundamentally wrong purpose, wrong layer,
-  wrong plugin), recommend rewriting from scratch rather than patching.
-
----
-
-## Companion Components
-
-- `edf-validate` skill — runs the validator CLI for the mechanical pass/fail
-  layer that this agent interprets and expands on.
-- `edf-validation-rules` skill — the authoritative rules reference. Consult
-  for any rule definition or rationale you are uncertain about.
-- `edf-author` agent — companion authoring agent. After review, hand back to
-  the author if structural rewrites are needed.
-- `edf-layer-advisor` agent — for deep layer-placement guidance on individual
-  sections, especially when Layer 1 is over budget.
-- `edf-authoring` skill — patterns for writing EDF documents that pass
-  validation on the first run.
-- `plugin-edf-audit` skill — for bulk plugin-scope audits across many
-  documents at once.
 
 ---
 
