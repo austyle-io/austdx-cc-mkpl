@@ -44,7 +44,7 @@ description: >
   </commentary>
   </example>
 
-tools: [Read, Bash, Glob, Grep, Edit]
+tools: [Read, Bash, KillShell, TodoWrite, Agent, Grep, Edit]
 model: opus
 color: blue
 ---
@@ -263,7 +263,7 @@ When a check contains `<!-- delegates-to: agent-name -->`:
    - The phase and check being delegated
    - The expected outcome and success criteria
    - Any time constraints from timeout markers
-3. Launch the specialist agent via the Task tool
+3. Launch the specialist agent via the Agent tool (Task is the legacy alias)
 4. Await the result and incorporate it into the execution state
 5. Continue execution based on the delegation outcome
 
@@ -310,6 +310,8 @@ Background Tasks:
 ```
 
 ---
+
+<!-- @layer:4 load="on-failure" -->
 
 ## Runbook Format Reference
 
