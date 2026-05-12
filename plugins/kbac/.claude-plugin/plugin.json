@@ -6,8 +6,8 @@
     "name": "austyle-io",
     "url": "https://github.com/austyle-io"
   },
-  "homepage": "https://github.com/austyle-io/austdx-cc-mkpl",
-  "repository": "https://github.com/austyle-io/austdx-cc-mkpl",
+  "homepage": "https://github.com/austyle-io/austdx-cc-mkpl/tree/main/plugins/kbac",
+  "repository": "https://github.com/austyle-io/austdx-cc-mkpl/tree/main/plugins/kbac",
   "license": "MIT",
   "keywords": ["neo4j", "cypher", "knowledge-graph", "typebox", "graph-database"]
 }
