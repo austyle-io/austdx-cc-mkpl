@@ -83,4 +83,4 @@ See `skills/edf-validation-rules/SKILL.md` for the full rules reference.
 
 ## License
 
-MIT — see the parent marketplace LICENSE.
+MIT — see [`./LICENSE`](./LICENSE).
