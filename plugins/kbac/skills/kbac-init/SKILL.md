@@ -10,6 +10,8 @@ description: >
 
 # Repository Setup for kbac
 
+<!-- @layer:1 -->
+
 ## Overview
 
 kbac requires Node.js 22+, yarn 3.7.0 (Berry), and Docker. Credentials live
