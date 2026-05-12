@@ -25,7 +25,8 @@ function validateRepo(candidate: string): { ok: true } | { ok: false; reason: st
   if (!existsSync(join(candidate, "package.json"))) {
     return { ok: false, reason: `missing package.json at: ${candidate}` };
   }
-  if (!existsSync(join(candidate, "cypher"))) {
+  const cypherPath = join(candidate, "cypher");
+  if (!existsSync(cypherPath) || !statSync(cypherPath).isDirectory()) {
     return { ok: false, reason: `missing cypher/ directory at: ${candidate}` };
   }
   return { ok: true };

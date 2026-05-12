@@ -33,7 +33,7 @@ before writing it into `.env`.
 
 | Tool | Check | Required | Install | Notes |
 |------|-------|----------|---------|-------|
-| Node.js | `node -v` | ≥ 20.x | `brew install node` or nvm | LTS recommended |
+| Node.js | `node -v` | ≥ 22.x | `brew install node` or nvm | LTS; 22+ required for `--env-file-if-exists` |
 | Corepack | `corepack -v` | ≥ 0.20 | `corepack enable` (ships with Node) | Enables yarn 3.x |
 | yarn | `yarn -v` | 3.7.0 | Automatic via `packageManager` in package.json | Berry, not Classic |
 | Docker | `docker -v` | ≥ 24.x | Docker Desktop for Mac | Must be running |
