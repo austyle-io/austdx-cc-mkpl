@@ -6,7 +6,9 @@ description: >
   Selects the right template, gathers required variables, and produces a
   properly-structured EDF document at the target path. Companion to the
   `edf-authoring` skill (the format reference) and `edf-author` agent (for
-  autonomous authoring of complex docs).
+  autonomous authoring of complex docs). For runbooks specifically, use
+  `runbook-scaffold`. For system-architecture doc sets, use
+  `arch-doc-scaffold`.
 ---
 
 # Scaffold EDF Component
