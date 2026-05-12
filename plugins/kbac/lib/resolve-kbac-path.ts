@@ -27,21 +27,32 @@ const DEFAULT_SETTINGS_FILE = fileURLToPath(
 );
 
 function validateRepo(candidate: string): { ok: true } | { ok: false; reason: string } {
+  const safeStat = (p: string): ReturnType<typeof statSync> | null => {
+    try {
+      return statSync(p);
+    } catch {
+      return null;
+    }
+  };
+
   if (!existsSync(candidate)) {
     return { ok: false, reason: `path does not exist: ${candidate}` };
   }
-  if (!statSync(candidate).isDirectory()) {
+  const candidateStat = safeStat(candidate);
+  if (!candidateStat || !candidateStat.isDirectory()) {
     return { ok: false, reason: `path is not a directory: ${candidate}` };
   }
   const wrapper = join(candidate, "bin", "kbac");
-  if (!existsSync(wrapper)) {
-    return { ok: false, reason: `missing bin/kbac at: ${candidate}` };
+  const wrapperStat = safeStat(wrapper);
+  if (!wrapperStat || !wrapperStat.isFile()) {
+    return { ok: false, reason: `missing or invalid bin/kbac at: ${candidate}` };
   }
   if (!existsSync(join(candidate, "package.json"))) {
     return { ok: false, reason: `missing package.json at: ${candidate}` };
   }
   const cypherPath = join(candidate, "cypher");
-  if (!existsSync(cypherPath) || !statSync(cypherPath).isDirectory()) {
+  const cypherStat = safeStat(cypherPath);
+  if (!cypherStat || !cypherStat.isDirectory()) {
     return { ok: false, reason: `missing cypher/ directory at: ${candidate}` };
   }
   return { ok: true };

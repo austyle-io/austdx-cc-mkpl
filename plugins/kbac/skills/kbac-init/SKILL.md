@@ -23,9 +23,10 @@ bootstrapping the database with seed data.
 
 ## Auth Boundary
 
-All phases below are `[auto]` — Claude can run them directly. The only
-interactive step is `AskUserQuestion` in Phase 2 to capture the password
-before writing it into `.env`.
+Phases 1, 3, 4, and 5 are `[auto]` — Claude can run them directly. **Phase 2
+is `[auth]`** because it captures the Neo4j password via `AskUserQuestion`
+(the only interactive credential prompt in this skill). Operators and
+policy tools should treat the Phase 2 boundary as a credential checkpoint.
 
 ## Prerequisites
 
@@ -86,7 +87,7 @@ yarn type-check
 If `yarn install` fails with a version error, ensure corepack is enabled — kbac's
 `packageManager: "yarn@3.7.0"` in package.json requires Berry, not Classic yarn.
 
-### Phase 2: Environment Setup [auto]
+### Phase 2: Environment Setup [auth]
 
 kbac loads credentials from a gitignored `.env` file using Node 22+'s
 `--env-file-if-exists` flag. The committed `.env.example` is the canonical

@@ -27,12 +27,12 @@ Parse them as a quoted search term followed by optional flags:
    kbac search "<term>" [--type <label>] [--limit <n>] --json
    ```
 
-   Quote the term to preserve spaces and special characters. Do not shell-escape inside the term — `kbac search` does its own Lucene escaping internally.
+   Wrap the term in shell quotes (single quotes when the term contains no apostrophes; otherwise double-quote and escape any `$`/backtick) so the shell does not split on whitespace or interpret metacharacters — this is the shell-injection boundary. **Inside** the quotes, do NOT pre-escape Lucene metacharacters; `kbac search` handles Lucene escaping internally.
 
 2. Inspect the exit code and stdout:
    - **Exit 0 + JSON with `term`, `results`, `totalCount`:** success. Render top results as Markdown (see Output Format).
    - **Exit 2 + JSON `{"error":"invalid_input", ...}`:** the user's flags were rejected. Show the message verbatim and remind them of valid flag values (`--type` must be Tool|Concept|Domain|System; `--limit` 1-100).
-   - **Exit 3 + JSON `{"error":"neo4j_unreachable" | "neo4j_timeout", ...}`:** the Neo4j container is down. Tell the user to run `docker ps` and `yarn -C ~/Github/kbac db:up`.
+   - **Exit 3 + JSON `{"error":"neo4j_unreachable" | "neo4j_timeout", ...}`:** the Neo4j container is down. Tell the user to run `docker ps` and `yarn -C "$KBAC_PROJECT_PATH" db:up` (or whichever path their kbac repo lives at; ensure `$KBAC_PROJECT_PATH` is set or substitute the explicit path).
    - **Exit 4 + JSON `{"error":"schema_mismatch", ...}`:** the graph has drifted from the TypeBox schemas. Suggest running the `kbac-schema-sync-checker` agent.
    - **Exit 127 + stderr containing "command not found":** the `kbac` binary is not on PATH. Tell the user to run `/kbac:kbac-init` first.
    - **Anything else:** report the error verbatim.
