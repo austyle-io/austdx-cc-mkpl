@@ -1,6 +1,6 @@
 ---
 name: kbac
-description: Fulltext search over the kbac knowledge graph
+description: Use when searching the kbac knowledge graph by fulltext term — typically with optional filters for node type (Tool, Concept, Domain, System) and a result limit.
 argument-hint: "<term> [--type Tool|Concept|Domain|System] [--limit 1-100]"
 allowed-tools: Bash
 ---

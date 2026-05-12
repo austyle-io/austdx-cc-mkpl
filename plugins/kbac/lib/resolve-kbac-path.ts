@@ -1,3 +1,18 @@
+/**
+ * Canonical kbac-path resolution helper.
+ *
+ * Used as the reference implementation for the validation logic the
+ * `kbac-init` skill performs in Phase 5 (CLI Path Setup) and that the
+ * `/kbac` slash command expects on lookup. Hooks and slash commands do
+ * not import this file directly today — it lives here so the contract
+ * is testable (`__tests__/resolve-kbac-path.test.ts`) and so future
+ * runtime callers (e.g., a JS-rewritten kbac-session-context hook) can
+ * import a single canonical resolver instead of duplicating the rules.
+ *
+ * Precedence: `$KBAC_PROJECT_PATH` env var > settings file > default
+ * (`~/Github/kbac`). Validates that the candidate carries `bin/kbac`,
+ * `package.json`, and a `cypher/` directory.
+ */
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";

@@ -117,13 +117,13 @@ yarn db:up` works for one-off invocations.
 ### Phase 3: Database Bootstrap [auto]
 
 ```bash
-# 6. Start Neo4j container (pulls image on first run)
+# 7. Start Neo4j container (pulls image on first run)
 yarn db:up
 
-# 7. Wait for Neo4j to be healthy (polls up to 60s)
+# 8. Wait for Neo4j to be healthy (polls up to 60s)
 yarn db:wait
 
-# 8. Run all seed files in order
+# 9. Run all seed files in order
 yarn db:seed
 ```
 
@@ -133,13 +133,13 @@ starts use the cached image and persistent named volume.
 ### Phase 4: Verification [auto]
 
 ```bash
-# 9. Run smoke test (Cypher 25 syntax + APOC validation)
+# 10. Run smoke test (Cypher 25 syntax + APOC validation)
 yarn cypher cypher/00-smoke-test.cypher
 
-# 10. Introspect graph schema
+# 11. Introspect graph schema
 yarn db:introspect
 
-# 11. Verify node counts via cypher-shell (loads NEO4J_* from .env)
+# 12. Verify node counts via cypher-shell (loads NEO4J_* from .env)
 set -a; source .env; set +a
 cypher-shell -a "$NEO4J_URI" -u "$NEO4J_USERNAME" -p "$NEO4J_PASSWORD" \
   "MATCH (n) RETURN labels(n)[0] AS label, count(n) AS count ORDER BY label;"
