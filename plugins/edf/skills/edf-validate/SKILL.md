@@ -34,8 +34,7 @@ rule definitions and rationale, read the `edf-validation-rules` skill.
 
 The validator currently checks two things:
 
-1. **Reference integrity** — Every reference in a document (frontmatter
-   `related:` entries, body `<ref>` tags) must resolve to a known target.
+1. **Reference integrity** — Every reference in a document — inline `<ref>` tags inside `<references>` blocks (the modern reference form), plus legacy `edf.components.*[].ref` frontmatter references — must resolve to a known target.
    Reports `EDF001` for missing targets, `EDF003` for version mismatches,
    `EDF004` for malformed reference strings, and `EDF005` when a Neo4j
    target is not present in the graph.
@@ -55,19 +54,19 @@ The validator is a TypeScript CLI run via `tsx`. From the
 ### Directory (recursive)
 
 ```bash
-yarn tsx src/validator/cli.ts /path/to/plugin
+pnpm exec tsx src/validator/cli.ts /path/to/plugin
 ```
 
 ### Single file
 
 ```bash
-yarn tsx src/validator/cli.ts --file /path/to/document.md
+pnpm exec tsx src/validator/cli.ts --file /path/to/document.md
 ```
 
 ### Help
 
 ```bash
-yarn tsx src/validator/cli.ts --help
+pnpm exec tsx src/validator/cli.ts --help
 ```
 
 The validator exits with status 0 when all documents pass and non-zero
