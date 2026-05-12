@@ -207,32 +207,38 @@ The validator classifies findings by severity.
 | `warning` | Likely defect; should be fixed before merge   | Surfaces in review  |
 | `info`    | Style or convention nudge                     | Reported, not gated |
 
-### Common error-level findings
+### Validator-emitted error codes
 
-| Code               | Trigger                                                |
-| ------------------ | ------------------------------------------------------ |
-| `missing-name`     | Frontmatter `name` field absent                        |
-| `name-mismatch`    | Frontmatter `name` ≠ file/directory name               |
-| `legacy-edf-block` | `edf:` block found in frontmatter                      |
-| `dangling-ref`     | Backticked component reference does not resolve        |
-| `reserved-prefix`  | Component name starts with a reserved prefix           |
-| `bad-step-order`   | `<step order="N">` values not sequential from 1        |
+The shipping `@austyle-io/edf` validator (`src/validator/cli.ts`) currently emits
+a fixed set of error codes. Quote them verbatim when citing findings.
 
-### Common warning-level findings
+| Code     | Trigger                                       |
+| -------- | --------------------------------------------- |
+| `EDF001` | Reference target not found                    |
+| `EDF002` | Circular reference detected                   |
+| `EDF003` | Version constraint not met                    |
+| `EDF004` | Invalid reference format                      |
+| `EDF005` | Neo4j target not in graph                     |
 
-| Code                  | Trigger                                                  |
-| --------------------- | -------------------------------------------------------- |
-| `missing-trigger-use` | `description` does not start with "Use when…"            |
-| `weak-description`    | `description` shorter than 40 characters                 |
-| `layer-out-of-order`  | Layer markers appear in wrong sequence                   |
-| `missing-summary`     | Long document (>200 lines) has no `<summary>` tag        |
+Warnings carry free-form `W*` codes (for example `W001`). Treat the code string
+as opaque and quote it as-is.
 
-### Common info-level findings
+### Doc-only rules (not yet enforced by the CLI)
 
-| Code                | Trigger                                                |
-| ------------------- | ------------------------------------------------------ |
-| `tool-centric-name` | Name appears to describe a tool, not a capability      |
-| `no-layers`         | Long document has no layer markers (suggestion only)   |
+The rules below are documented contracts but are **not currently emitted as
+codes by the validator**. Reviewers should flag them in narrative findings;
+authors should follow them by convention.
+
+- Frontmatter `name` present and matches file/directory name.
+- `description` begins with `Use when` and is at least 40 characters.
+- No forbidden frontmatter fields (`edf:`, `version:`, `related:`).
+- Agent files include a `tools:` array.
+- Component names avoid reserved prefixes (see Naming Conventions).
+- `<workflow>` carries a `name` attribute; `<step>` `order` is sequential from 1.
+- Layer markers appear in order starting at Layer 1 — Executive Briefing.
+
+When the validator gains support for these checks, this section moves into
+the table above.
 
 ## Validation Checklist
 
