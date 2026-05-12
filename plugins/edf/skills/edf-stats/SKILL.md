@@ -39,12 +39,12 @@ The parser is consumed via JIT execution against the local
 
 ```bash
 # Whole tree (current directory)
-pnpm dlx tsx /Users/tyleraustin/Github/edf/src/parser/cli.ts stats
+pnpm dlx tsx /path/to/austyle-io/edf/src/parser/cli.ts stats
 
 # Scoped to a subdirectory
-pnpm dlx tsx /Users/tyleraustin/Github/edf/src/parser/cli.ts stats ./skills
-pnpm dlx tsx /Users/tyleraustin/Github/edf/src/parser/cli.ts stats ./agents
-pnpm dlx tsx /Users/tyleraustin/Github/edf/src/parser/cli.ts stats ./plugins/edf
+pnpm dlx tsx /path/to/austyle-io/edf/src/parser/cli.ts stats ./skills
+pnpm dlx tsx /path/to/austyle-io/edf/src/parser/cli.ts stats ./agents
+pnpm dlx tsx /path/to/austyle-io/edf/src/parser/cli.ts stats ./plugins/edf
 ```
 
 If the consumer repo installs `@austyle-io/edf` as a workspace
@@ -67,7 +67,7 @@ is supplied. The CLI walks the tree, skipping `node_modules` and
 | `documentsAnalyzed`          | number              | Count of EDF documents discovered                 |
 | `totalTokens`                | number              | Sum of token estimates across all documents       |
 | `avgTokensPerDoc`            | number              | `totalTokens / documentsAnalyzed`, rounded        |
-| `documentsWithLayers`        | number              | Docs that mark explicit `<layer>` boundaries      |
+| `documentsWithLayers`        | number              | Docs that mark explicit `<!-- @layer:N -->` boundaries |
 | `documentsWithXmlTags`       | number              | Docs that use semantic XML tags                   |
 | `documentsWithDecisionTrees` | number              | Docs containing decision-tree embeds              |
 | `tokensByLayer`              | `Record<1-4,number>`| Token totals partitioned by disclosure layer      |
@@ -75,7 +75,7 @@ is supplied. The CLI walks the tree, skipping `node_modules` and
 Pipe the output to `jq` to filter, sort, or roll up:
 
 ```bash
-pnpm dlx tsx /Users/tyleraustin/Github/edf/src/parser/cli.ts stats ./skills \
+pnpm dlx tsx /path/to/austyle-io/edf/src/parser/cli.ts stats ./skills \
   | jq '{total: .totalTokens, avg: .avgTokensPerDoc, byLayer: .tokensByLayer}'
 ```
 
@@ -104,7 +104,7 @@ gradient. Anti-patterns to flag in the report:
 2. Inspect layer composition for that file with the sibling subcommand:
 
    ```bash
-   pnpm dlx tsx /Users/tyleraustin/Github/edf/src/parser/cli.ts layers \
+   pnpm dlx tsx /path/to/austyle-io/edf/src/parser/cli.ts layers \
      ./skills/<suspect>/SKILL.md
    ```
 

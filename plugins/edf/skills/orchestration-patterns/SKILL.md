@@ -11,6 +11,8 @@ description: >
   `edf-authoring`.
 ---
 
+<!-- @layer:1 -->
+
 # Orchestration Patterns
 
 The EDF library exposes four orchestration structures. Each has a single

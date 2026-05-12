@@ -11,6 +11,8 @@ description: >
   `arch-doc-scaffold`.
 ---
 
+<!-- @layer:1 -->
+
 # Scaffold EDF Component
 
 This skill guides Claude through scaffolding a new EDF component from the
@@ -155,7 +157,7 @@ Look up the template file at
 `@austyle-io/edf/src/templates/templates/<type>.template.md`. If the
 file is not present in the current repo, fall back to:
 
-- `/Users/tyleraustin/Github/edf/src/templates/templates/`
+- `/path/to/austyle-io/edf/src/templates/templates/`
 - Or whatever path the `@austyle-io/edf` library is installed to.
 
 Read the frontmatter to confirm the variable list — do not rely on this
@@ -187,7 +189,7 @@ above. Validate:
 The templates engine uses Handlebars-style syntax (`{{#if}}`,
 `{{#each}}`, `${VAR}`). You can either:
 
-- Run the engine: `pnpm dlx tsx /Users/tyleraustin/Github/edf/src/templates/cli.ts process <template> <vars>`
+- Run the engine: `pnpm dlx tsx /path/to/austyle-io/edf/src/templates/cli.ts process <template> <vars>`
 - Or render inline by substituting `${VAR}` references and resolving
   `{{#if}}` / `{{#each}}` blocks against the collected variables.
 

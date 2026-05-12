@@ -14,6 +14,8 @@ description: >
   right answer is obvious and recoverable.
 ---
 
+<!-- @layer:1 -->
+
 # Decision Protocol
 
 When you encounter a situation requiring human decision-making, use this

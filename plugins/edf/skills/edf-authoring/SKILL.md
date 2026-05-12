@@ -10,6 +10,8 @@ description: >
   delegate to the `edf-author` agent.
 ---
 
+<!-- @layer:1 -->
+
 # EDF Authoring
 
 EDF (Enhanced Document Format) is a structured markdown dialect for

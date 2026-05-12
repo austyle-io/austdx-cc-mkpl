@@ -8,6 +8,8 @@ description: >
   the validator CLI — this skill is the *rules reference*.
 ---
 
+<!-- @layer:1 -->
+
 # EDF Validation Rules
 
 The authoritative rules reference for the Extensible Document Format (EDF).

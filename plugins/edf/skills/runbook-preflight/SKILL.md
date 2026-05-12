@@ -59,7 +59,7 @@ documentation comprehension.
    user to disambiguate before dispatching — the strategist needs a
    concrete runbook path.
 
-2. **Dispatch `runbook-strategist`** via the Task tool. Pass the runbook
+2. **Dispatch `runbook-strategist`** via the Agent tool (`Task` is the legacy alias). Pass the runbook
    path and a clear instruction to produce a full strategic assessment:
 
    ```text

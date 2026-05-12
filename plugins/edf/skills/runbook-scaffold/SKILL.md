@@ -9,6 +9,8 @@ description: >
   `runbook-executor` agent (which runs the finished runbook end-to-end).
 ---
 
+<!-- @layer:1 -->
+
 # Runbook Scaffold
 
 Scaffold a new, ready-to-edit runbook stub. This skill is the **starting

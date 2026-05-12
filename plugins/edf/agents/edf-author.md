@@ -115,7 +115,7 @@ EDF documents are consumed by:
   <output>Document type and subject confirmed</output>
 </step>
 <step order="2">
-  Draft frontmatter: `name`, `description` ("Use this when..." for agents/skills), `model`, `color`, `version`.
+  Draft frontmatter: `name`, `description` ("Use when..." for agents/skills), `model` (agents only), `color` (agents only). Do **not** add `version:` or `type:` to component docs (agent/skill/command/hook) — those fields are forbidden on components and only belong on runbooks.
   <output>Valid YAML frontmatter</output>
 </step>
 <step order="3">
@@ -193,11 +193,9 @@ color: green | blue | purple | ...   # required for agents
 ---
 ```
 
-Additional optional fields used by the edf ecosystem:
+Additional fields used by the edf ecosystem:
 
 ```yaml
-version: 1.0.0                       # semver; include for versioned docs
-type: runbook | agent | skill | arch | reference
 tools:                               # for agent files
   - Read
   - Glob
@@ -206,8 +204,14 @@ tools:                               # for agent files
   - Write
 ```
 
-Do NOT include `edf:` block, `related:` block, or `neo4j:` block — these are legacy
-non-standard fields.
+Runbooks (runtime artifacts, not EDF components) carry their own frontmatter
+shape — `name`, `type: runbook`, `version: "1.0.0"`, `description`, optional
+`tags`, `estimated_duration`. See `edf-validation-rules` → "Runbook frontmatter"
+for the full contract.
+
+Do NOT include `edf:` block, `related:` block, `neo4j:` block, or — on
+component docs (agent/skill/command/hook) — `version:` or `type:`. These are
+forbidden component-doc fields.
 
 ---
 

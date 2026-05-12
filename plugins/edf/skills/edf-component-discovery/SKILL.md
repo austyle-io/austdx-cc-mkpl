@@ -9,6 +9,8 @@ description: >
   discovered components.
 ---
 
+<!-- @layer:1 -->
+
 # EDF Component Discovery
 
 Build an inventory of EDF components — agents, skills, commands, runbooks,

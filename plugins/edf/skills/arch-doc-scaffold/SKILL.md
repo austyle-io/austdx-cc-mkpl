@@ -9,6 +9,8 @@ description: >
   by the @austyle-io/edf library.
 ---
 
+<!-- @layer:1 -->
+
 # System Architecture Doc Scaffold
 
 This skill bootstraps a complete EDF-compliant system architecture
@@ -188,6 +190,15 @@ title: <System Name> — Architecture
 ## Data flow
 
 Describe the principal request / event flow through the system.
+
+```text
+[caller] ──▶ [entry handler] ──▶ [domain logic] ──▶ [persistence]
+                                       │
+                                       └──▶ [side effect / queue]
+```
+
+Annotate each arrow with the payload type, the failure mode, and any
+back-pressure or retry behaviour.
 ```
 
 ### components.md, api.md, getting-started.md, troubleshooting.md

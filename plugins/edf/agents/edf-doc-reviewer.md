@@ -112,12 +112,17 @@ model:       # string — opus | sonnet | haiku (optional)
 color:       # string — named color or hex (optional, UI hint)
 ```
 
-**Forbidden in modern EDF (strip on sight)**:
+**Forbidden on EDF component docs** (`agent`, `skill`, `command`, `hook`) — strip on sight:
 
 - `edf:` block (legacy schema versioning)
 - `version:` (per-doc versions diverged from plugin version)
 - `related:` (cross-refs go in body prose)
 - `model:` on skills/commands (still valid for agents only)
+
+**Note:** Runbooks are runtime artifacts, **not** EDF components. They have
+their own frontmatter contract (see `edf-validation-rules` → "Runbook
+frontmatter") and may legitimately carry `version:` and `type: runbook`. Do
+not flag those fields on runbook docs.
 
 **Review criteria**:
 - `name` must match the filename for agents (`<name>.md`) or the directory

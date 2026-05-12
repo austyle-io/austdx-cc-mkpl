@@ -9,6 +9,8 @@ description: >
   per-phase verification gates, and link-rewrite hygiene for cross-references.
 ---
 
+<!-- @layer:1 -->
+
 # Migration Patterns
 
 Migrations fail in the same ways: someone runs the real thing before a dry
@@ -32,7 +34,7 @@ checklist that prevents those.
 
 ## The phases
 
-```
+```text
 Plan ──▶ Dry-run ──▶ Stage ──▶ Execute ──▶ Verify ──▶ Cleanup
   │         │          │          │           │          │
   └─ rollback plan exists at every transition ──────────┘
@@ -169,7 +171,7 @@ When migrating things with dependencies, leaf-first. A consumer breaks if
 its dependency moves out from under it, but a dependency is safe to move
 before its consumers know.
 
-```
+```text
 1. Identify dependency graph
 2. Topologically sort: leaves (no dependencies) first
 3. Migrate each node, then update its consumers to point to the new location

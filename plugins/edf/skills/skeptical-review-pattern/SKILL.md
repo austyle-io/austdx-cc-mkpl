@@ -9,6 +9,8 @@ description: >
   `decision-protocol` when skepticism surfaces a need for human input.
 ---
 
+<!-- @layer:1 -->
+
 # Skeptical Review Pattern
 
 A structured pattern for critical evaluation of claims, plans, designs, or
@@ -42,7 +44,7 @@ Skip the full pattern (a quick sanity check is enough) when:
 
 ## The decision tree
 
-```
+```text
                           ┌───────────────────────┐
                           │ Claim / plan received │
                           └──────────┬────────────┘
@@ -234,7 +236,7 @@ wrong has not been examined hard enough.
 When this pattern is used to evaluate something explicitly, the result
 should be expressible as:
 
-```
+```text
 Claim:        <one sentence>
 Evidence:     <first-party / cited / none>  — <strong/weak/stale>
 Assumptions:  <bulleted, with status>

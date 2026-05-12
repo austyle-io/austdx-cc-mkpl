@@ -10,6 +10,8 @@ description: >
   and the `runbook-executor` agent (which runs the finished runbook).
 ---
 
+<!-- @layer:1 -->
+
 # Runbook Authoring
 
 A runbook is a structured Markdown document with YAML frontmatter that the

@@ -38,7 +38,7 @@ description: >
   </commentary>
   </example>
 
-tools: [Read, Bash, Glob, Grep]
+tools: [Read, Bash, Glob, Grep, mcp__neo4j-memory__search_memories]
 model: opus
 color: yellow
 ---
