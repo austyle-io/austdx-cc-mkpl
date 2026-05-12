@@ -51,17 +51,22 @@ EDF documents come in four flavors. Required fields and behavior differ per type
 | --------------- | ------ | ------------------------------------------- |
 | `argument-hint` | string | Usage hint shown in autocomplete (optional) |
 
-### Forbidden in modern EDF
+### Forbidden in modern EDF (all component types)
 
 These fields appeared in legacy v2.0.0 documents and must be **stripped** on
-migration. The `edf-validate` CLI emits errors when it finds them.
+migration regardless of component type. The `edf-validate` CLI flags them.
 
 | Field         | Why removed                                                   |
 | ------------- | ------------------------------------------------------------- |
 | `edf:` block  | Schema versioning and Neo4j sync now handled externally       |
 | `version:`    | Per-document versions diverged from plugin version            |
 | `related:`    | Cross-references go in body prose, not frontmatter            |
-| `model:`      | Removed from skills/commands (still valid for agents)         |
+
+### Restricted to agents
+
+| Field    | Notes                                                            |
+| -------- | ---------------------------------------------------------------- |
+| `model:` | Valid on agent files only. Skills and commands must not declare it. |
 
 ## Semantic XML Tags
 
