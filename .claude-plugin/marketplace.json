@@ -67,7 +67,9 @@
         "checklist",
         "orchestration",
         "validation",
-        "templates"
+        "templates",
+        "skill",
+        "agent"
       ],
       "category": "developer-experience",
       "tags": ["edf", "runbook", "orchestration", "decision-tree", "workflow", "agent", "skill"]
