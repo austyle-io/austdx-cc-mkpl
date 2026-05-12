@@ -2,7 +2,9 @@
 name: migration-patterns
 description: >
   Use when planning or executing a migration — moving code, docs, schemas, or
-  data between locations, formats, or systems. Covers the dry-run-first
+  data between locations, formats, or systems. Triggers include "move this
+  directory", "rename across the repo", "convert from X to Y", "before I run
+  this migration script", "is this migration safe". Covers the dry-run-first
   principle, rollback-ready execution, idempotency rules for safe replay,
   per-phase verification gates, and link-rewrite hygiene for cross-references.
 ---

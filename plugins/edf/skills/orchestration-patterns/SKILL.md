@@ -1,13 +1,14 @@
 ---
 name: orchestration-patterns
 description: >
-  Use when choosing between a runbook, decision tree, checklist, or workflow —
-  triggers like "should this be a runbook or a workflow", "how do I structure
-  this procedure", "what's the right format for these checks", or before
-  authoring any orchestration document. Provides the 4-structure framework
-  with selection criteria, composition patterns (runbooks embed decision-trees;
-  workflows gate on checklists), and anti-patterns. Companion to
-  `runbook-authoring` and `edf-authoring`.
+  Use when choosing between a runbook, decision tree, checklist, or workflow,
+  or before authoring any orchestration document. Triggers include "should
+  this be a runbook or a workflow", "how do I structure this procedure",
+  "what's the right format for these checks", "is this a checklist or a
+  runbook". Provides the 4-structure framework with selection criteria,
+  composition patterns (runbooks embed decision-trees; workflows gate on
+  checklists), and anti-patterns. Companion to `runbook-authoring` and
+  `edf-authoring`.
 ---
 
 # Orchestration Patterns
