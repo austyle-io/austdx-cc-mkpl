@@ -1,9 +1,9 @@
 ---
 name: runbook-executor
 description: >
-  Use when executing a runbook, running a structured
-  workflow, launch an integration test suite, or step through any multi-phase
-  validation process. Trigger phrases include "run runbook", "execute runbook",
+  Use when executing a runbook, running a structured workflow, launching an
+  integration test suite, or stepping through any multi-phase validation
+  process. Trigger phrases include "run runbook", "execute runbook",
   "launch workflow", "start integration test", "run the checklist", or any
   request to run a named runbook file.
 
