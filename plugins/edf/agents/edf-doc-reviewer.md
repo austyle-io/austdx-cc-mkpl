@@ -1,7 +1,7 @@
 ---
 name: edf-doc-reviewer
 description: >
-  Use this agent when reviewing an existing EDF document for quality, compliance,
+  Use when reviewing an existing EDF document for quality, compliance,
   structure, references, and semantic correctness — going beyond simple pass/fail
   validation to give actionable, narrative improvement guidance.
 

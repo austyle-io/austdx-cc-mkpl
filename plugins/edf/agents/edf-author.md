@@ -1,7 +1,7 @@
 ---
 name: edf-author
 description: >
-  Use this agent when you need to author, generate, or refactor EDF (Enhanced
+  Use when authoring, generating, or refactoring EDF (Enhanced
   Document Format) documents — new runbooks, decision-tree docs, system-arch
   docs, agent prompt files, skill files, or any plain markdown that needs
   conversion to EDF-compliant format with progressive disclosure and semantic

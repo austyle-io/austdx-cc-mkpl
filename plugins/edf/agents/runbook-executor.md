@@ -1,7 +1,7 @@
 ---
 name: runbook-executor
 description: >
-  Use this agent when the user wants to execute a runbook, run a structured
+  Use when executing a runbook, running a structured
   workflow, launch an integration test suite, or step through any multi-phase
   validation process. Trigger phrases include "run runbook", "execute runbook",
   "launch workflow", "start integration test", "run the checklist", or any

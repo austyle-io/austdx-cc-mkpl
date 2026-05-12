@@ -1,7 +1,7 @@
 ---
 name: runbook-strategist
 description: >
-  Use this agent when a user wants to assess, review, preflight, or validate
+  Use when assessing, reviewing, preflighting, or validating
   the environment for a runbook before launching it. This agent gathers
   intelligence, checks prerequisites, identifies risks, and recommends an
   execution approach — it does NOT execute the runbook. For actual execution,

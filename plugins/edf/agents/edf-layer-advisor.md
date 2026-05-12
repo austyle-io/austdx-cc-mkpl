@@ -1,7 +1,7 @@
 ---
 name: edf-layer-advisor
 description: >
-  Use this agent when authoring or auditing an EDF document and needing to
+  Use when authoring or auditing an EDF document and needing to
   determine correct placement within the 4-layer progressive disclosure
   structure — what belongs at Layer 1 (Executive Briefing), Layer 2
   (Operational Context), Layer 3 (Implementation Detail), or Layer 4
