@@ -7,6 +7,8 @@ description: >
   a per-file findings report. Pair with the `edf-doc-reviewer` agent for
   narrative review and the `edf-validate` skill for single-document
   validation.
+  For quantitative metrics only (token counts, doc counts), use
+  `edf-stats` instead — this skill produces qualitative findings.
 ---
 
 # Plugin EDF Audit

@@ -7,6 +7,9 @@ description: >
   reference-graph stats. Surfaces outsized docs that may need refactoring.
   Runs the @austyle-io/edf library's parser CLI (`tsx src/parser/cli.ts
   stats`) and reports the result.
+  For compliance findings reports (broken refs, layer issues,
+  forbidden fields), use `plugin-edf-audit` — this skill is for
+  quantitative metrics only (counts, tokens, percentages).
 ---
 
 # EDF Stats
