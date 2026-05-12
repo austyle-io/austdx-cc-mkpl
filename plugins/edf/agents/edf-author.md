@@ -249,22 +249,22 @@ Structure every EDF document so a consumer can load only what it needs:
 Separate layers with a horizontal rule and a comment indicating the layer number:
 
 ```markdown
-<!-- Layer 1: Executive Briefing (identity, goal, summary) -->
+<!-- @layer:1 -->
 <goal>...</goal>
 
 ---
 
-<!-- Layer 2: Operational Context (triggers, constraints, workflow) -->
+<!-- @layer:2 -->
 <trigger-signals>...</trigger-signals>
 
 ---
 
-<!-- Layer 3: Implementation Detail (examples, patterns, decision-trees) -->
+<!-- @layer:3 load="on-demand" -->
 <examples>...</examples>
 
 ---
 
-<!-- Layer 4: Reference (troubleshooting, edge cases, citations) -->
+<!-- @layer:4 load="on-failure" -->
 ## Troubleshooting
 ...
 ```
@@ -301,7 +301,7 @@ version: 1.0.0
 type: runbook
 ---
 
-<!-- Layer 1: Executive Briefing (identity, goal, summary) -->
+<!-- @layer:1 -->
 <goal>One sentence: what this runbook achieves.</goal>
 
 <summary>
@@ -310,7 +310,7 @@ When to run, estimated time, required permissions.
 
 ---
 
-<!-- Layer 2: Operational Context (triggers, constraints, workflow) -->
+<!-- @layer:2 -->
 <trigger-signals>
   <signal pattern="keyword.*pattern">Human description</signal>
 </trigger-signals>
