@@ -31,7 +31,7 @@ description: >
   Context: User received validation errors from `edf-validate` and wants to
   understand what they mean and how to fix them.
 
-  user: "The edf-validate skill flagged `dangling-ref` and `layer-out-of-order`
+  user: "The edf-validate skill flagged `EDF001` and a `W*` warning
   on my skill doc. What do those mean and what should I actually change?"
 
   assistant: "I'll pull up the document and run a review pass. I'll explain
@@ -115,11 +115,12 @@ color:       # string — named color or hex (optional, UI hint)
 **Review criteria**:
 - `name` must match the filename for agents (`<name>.md`) or the directory
   name for skills (`skills/<name>/SKILL.md`). Drift causes registry lookup
-  failures (`name-mismatch` error).
+  failures. Surface as a narrative finding — the validator does not emit a
+  dedicated code for this.
 - `description` must begin with "Use when…" — this is the dispatcher's
   intent-matching contract, not a stylistic preference. Passive descriptions
-  ("This agent validates…") trigger `missing-trigger-use` warnings.
-- `description` shorter than ~40 characters triggers `weak-description`.
+  ("This agent validates…") are surfaced via free-form `W*` warnings.
+- `description` shorter than ~40 characters is surfaced via a `W*` warning.
 - `model` for agents should match the workload. Heavy reasoning or long-context
   tasks warrant `opus`; routine tasks fit `sonnet` or `haiku`.
 - Flag any forbidden frontmatter keys — these are legacy v2.0.0 artifacts and
@@ -172,8 +173,8 @@ content loaded eagerly) or behavioral gaps (essential rules loaded too late).
   troubleshooting in Layer 1 wastes tokens until something breaks.
 - For deep layer-placement guidance on individual sections, defer to the
   `edf-layer-advisor` agent.
-- Out-of-order or gapped markers trigger `layer-out-of-order` or `E-LAY-*`
-  errors from the validator. Escalate these as high-priority findings.
+- Out-of-order or gapped markers are surfaced as warnings by the validator
+  (free-form `W*` codes). Escalate these as high-priority findings.
 
 ### 4. Reference Integrity
 
@@ -196,12 +197,12 @@ resource id, or external URL).
 
 **Review criteria**:
 - Does each backticked component name resolve to a real file or directory?
-  Dangling references trigger `dangling-ref` errors.
+  Dangling references trigger `EDF001` errors.
 - Are unprefixed references that fail to resolve locally actually
   cross-plugin? They need the `plugin:` prefix.
 - Are there concepts mentioned in prose that *should* be formalized as
   backticked references but aren't?
-- Flag circular references (`E-CYC-*`). If A refs B and B refs A, determine
+- Flag circular references (`EDF002`). If A refs B and B refs A, determine
   whether it is intentional (mutual dependency) or unintentional
   (refactoring residue).
 - Does the target point to a deprecated or renamed component? Cross-check
@@ -233,7 +234,8 @@ Malformed tags cause parser failures and silent data loss.
 - Attributes must be quoted; unquoted values are invalid.
 - Required attributes must be present: `<workflow>` requires `name`; `<step>`
   requires `order` (sequential, 1-indexed). Missing or out-of-order values
-  trigger `bad-step-order`.
+  are surfaced as narrative findings — the validator does not emit a
+  dedicated code for this.
 - The legacy `<example>` / `<commentary>` convention is no longer required
   in modern skills. The validator does *not* flag absence, but it *does*
   flag malformed leftovers — close or remove them.
@@ -323,8 +325,7 @@ findings. Be direct.}
   - **Why it matters**: {consequence if not fixed}
   - **Fix**: {concrete edit or action}
 
-  *(Quote codes verbatim from the validator: e.g., `E-FM-002`, `dangling-ref`,
-  `name-mismatch`. Do not invent codes.)*
+  *(Quote codes verbatim from the validator: e.g., `EDF001`, `EDF003`. Do not invent codes.)*
 
 #### High
 
@@ -378,54 +379,26 @@ genuinely nothing positive to note.}
 
 ## Error Code Reference
 
-The validator emits two flavors of code: prefixed codes from the CLI
-(`E-FM-002`, `E-REF-014`, etc.) and named codes from the rules catalog
-(`missing-name`, `dangling-ref`, etc.). Both are stable contracts — quote
-them verbatim when you cite findings, do not paraphrase.
+The validator emits a fixed set of codes: errors `EDF001` through `EDF005`
+and free-form warning strings prefixed `W` (e.g. `W001`). Quote them verbatim
+when citing findings. Do not paraphrase, abbreviate, or invent codes. If a
+rule is documented in `edf-validation-rules` under "Doc-only rules" rather
+than the validator-emitted table, surface it as a narrative finding without
+a code.
 
 For the authoritative list and rule rationale, consult the
 `edf-validation-rules` skill.
 
-### CLI code prefixes
+### Validator-emitted error codes
 
-| Prefix | Domain |
-|--------|--------|
-| `E-FM-*` | Frontmatter schema violations |
-| `E-REF-*` | Reference integrity failures |
-| `E-CYC-*` | Circular references |
-| `E-LAY-*` | Layer-structure violations |
-| `E-TAG-*` | XML / semantic tag problems |
-| `E-CONV-*` | Convention violations (errors) |
-| `W-CONV-*` | Convention violations (warnings) |
-
-### Common named codes
-
-**Error severity**:
-
-| Code | Trigger |
-|------|---------|
-| `missing-name` | Frontmatter `name` field absent |
-| `name-mismatch` | Frontmatter `name` ≠ file/directory name |
-| `legacy-edf-block` | `edf:` block found in frontmatter |
-| `dangling-ref` | Backticked component reference does not resolve |
-| `reserved-prefix` | Component name starts with a reserved prefix (`mcp-`, `neo4j-`, etc.) |
-| `bad-step-order` | `<step order="N">` values not sequential from 1 |
-
-**Warning severity**:
-
-| Code | Trigger |
-|------|---------|
-| `missing-trigger-use` | `description` does not start with "Use when…" |
-| `weak-description` | `description` shorter than 40 characters |
-| `layer-out-of-order` | Layer markers appear in wrong sequence |
-| `missing-summary` | Long document (> 200 lines) has no `<summary>` tag |
-
-**Info severity**:
-
-| Code | Trigger |
-|------|---------|
-| `tool-centric-name` | Name appears to describe a tool, not a capability |
-| `no-layers` | Long document has no layer markers (suggestion) |
+| Finding          | Code     | Meaning                              |
+| ---------------- | -------- | ------------------------------------ |
+| Reference target | `EDF001` | Backticked component does not resolve |
+| Circular ref     | `EDF002` | Cycle detected in reference graph    |
+| Version mismatch | `EDF003` | Reference version constraint failed  |
+| Bad ref format   | `EDF004` | Reference string is malformed        |
+| Neo4j missing    | `EDF005` | Reference target not in Neo4j graph  |
+| Warning          | `W*`     | Free-form warning code from CLI      |
 
 ---
 
