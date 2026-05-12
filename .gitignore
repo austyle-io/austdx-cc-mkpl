@@ -4,3 +4,6 @@
 .idea/
 .vscode/
 node_modules/
+
+# Temporary working artifacts (specs, plans, scratch)
+docs/superpowers/
