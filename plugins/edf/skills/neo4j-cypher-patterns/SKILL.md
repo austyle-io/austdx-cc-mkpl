@@ -185,29 +185,34 @@ CREATE INDEX validation_timestamp IF NOT EXISTS FOR (v:ValidationResult) ON (v.t
 
 ## MCP Invocation
 
+Tool names use hyphens (matching the MCP server names — `neo4j-cypher`,
+`neo4j-memory`). Hyphens are not valid TypeScript identifier characters,
+so the snippets below pass the tool name as a string to a `callMcp(...)`
+helper rather than using bare identifiers.
+
 Read query:
 
 ```typescript
-const result = await mcp__neo4j_cypher__read_neo4j_cypher({
+const result = await callMcp("mcp__neo4j-cypher__read_neo4j_cypher", {
   query: `MATCH (p:Plugin {name: $name}) RETURN p`,
-  params: { name: 'edf' },
+  params: { name: "edf" },
 });
 ```
 
 Write query:
 
 ```typescript
-await mcp__neo4j_cypher__write_neo4j_cypher({
+await callMcp("mcp__neo4j-cypher__write_neo4j_cypher", {
   query: `MERGE (p:Plugin {name: $name}) SET p.updated = datetime()`,
-  params: { name: 'edf' },
+  params: { name: "edf" },
 });
 ```
 
 Memory search before create:
 
 ```typescript
-const memories = await mcp__neo4j_memory__search_memories({
-  query: 'edf validation result for plugin X',
+const memories = await callMcp("mcp__neo4j-memory__search_memories", {
+  query: "edf validation result for plugin X",
 });
 ```
 

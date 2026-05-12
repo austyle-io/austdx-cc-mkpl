@@ -9,9 +9,11 @@
  * runtime callers (e.g., a JS-rewritten kbac-session-context hook) can
  * import a single canonical resolver instead of duplicating the rules.
  *
- * Precedence: `$KBAC_PROJECT_PATH` env var > settings file > default
- * (`~/Github/kbac`). Validates that the candidate carries `bin/kbac`,
- * `package.json`, and a `cypher/` directory.
+ * Precedence: `$KBAC_PROJECT_PATH` env var > settings file
+ * (`.claude/kbac.local.md`). Throws a descriptive error if neither
+ * yields a valid kbac repo — there is no implicit default. Validates
+ * that the candidate carries `bin/kbac`, `package.json`, and a
+ * `cypher/` directory.
  */
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";

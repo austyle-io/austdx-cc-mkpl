@@ -87,6 +87,13 @@ yarn type-check
 If `yarn install` fails with a version error, ensure corepack is enabled — kbac's
 `packageManager: "yarn@3.7.0"` in package.json requires Berry, not Classic yarn.
 
+> **Marketplace plugin setup** — the steps above bootstrap the **kbac repo**.
+> If you separately installed the `kbac` plugin from this marketplace, also run
+> `yarn install` inside `<marketplace>/plugins/kbac/hooks/` to materialize the
+> SessionStart hook's runtime deps (`typebox`, `ajv`, `tsx`). The hooks dir
+> ships its own `yarn.lock` and `.yarnrc.yml` and is independent of the kbac
+> repo install above.
+
 ### Phase 2: Environment Setup [auth]
 
 kbac loads credentials from a gitignored `.env` file using Node 22+'s
