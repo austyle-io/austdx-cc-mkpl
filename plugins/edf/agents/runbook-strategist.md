@@ -23,7 +23,7 @@ description: >
   assistant: "I'll use the runbook-strategist to run a risk assessment across each phase before we proceed."
   <commentary>
   "Risks", "what could go wrong" directly map to runbook-strategist's failure-mode
-  analysis. It produces risk levels (🟢🟡🔴) per phase with mitigations.
+  analysis. It produces risk levels (LOW/MED/HIGH) per phase with mitigations.
   </commentary>
   </example>
 
@@ -97,18 +97,18 @@ Probe the actual environment. Do not assume:
 
 ```bash
 # Tool presence
-docker info > /dev/null 2>&1 && echo "✅ Docker" || echo "❌ Docker"
+docker info > /dev/null 2>&1 && echo "OK Docker" || echo "FAIL Docker"
 node --version 2>/dev/null
 pnpm --version 2>/dev/null
 
 # Port availability
-! lsof -i :8080 > /dev/null 2>&1 && echo "✅ Port 8080 free" || echo "⚠️ Port 8080 in use"
+! lsof -i :8080 > /dev/null 2>&1 && echo "OK Port 8080 free" || echo "WARN Port 8080 in use"
 
 # Disk space
 df -h .
 
 # Service health
-curl -sf http://localhost:8081/health && echo "✅ API" || echo "❌ API not responding"
+curl -sf http://localhost:8081/health && echo "OK API" || echo "FAIL API not responding"
 ```
 
 ### Phase 3: Risk Assessment
@@ -126,9 +126,9 @@ For each phase and check, evaluate these dimensions:
 
 Assign risk levels:
 
-- 🟢 **Low** — Unlikely to fail; easy recovery if it does.
-- 🟡 **Medium** — May fail under certain conditions; mitigations available.
-- 🔴 **High** — Significant failure probability or high blast radius.
+- **Low** — Unlikely to fail; easy recovery if it does.
+- **Medium** — May fail under certain conditions; mitigations available.
+- **High** — Significant failure probability or high blast radius.
 
 Apply FMEA thinking to each check:
 
@@ -179,7 +179,7 @@ Produce your output in this structure:
 
 ```text
 ═══════════════════════════════════════════════════════════════
-📋 RUNBOOK STRATEGIST: Pre-Flight Assessment
+RUNBOOK STRATEGIST: Pre-Flight Assessment
 ═══════════════════════════════════════════════════════════════
 
 Runbook: {name} v{version}
@@ -196,11 +196,11 @@ EXECUTIVE SUMMARY
 PREREQUISITES STATUS
 ───────────────────────────────────────────────────────────────
 
-✅ Docker: Running (v27.5.0)
-✅ Node.js: v24.11.0 (required: 24.x)
-✅ pnpm: 10.15.0 (required: 10.x)
-⚠️ Port 8080: In use by nginx (may conflict)
-❌ Backend API: Not responding at localhost:8081
+OK   Docker: Running (v27.5.0)
+OK   Node.js: v24.11.0 (required: 24.x)
+OK   pnpm: 10.15.0 (required: 10.x)
+WARN Port 8080: In use by nginx (may conflict)
+FAIL Backend API: Not responding at localhost:8081
 
 Readiness: PARTIAL (4/5 prerequisites met)
 
@@ -209,15 +209,15 @@ RISK ASSESSMENT
 ───────────────────────────────────────────────────────────────
 
 Phase 2: Docker Build
-  🟡 MEDIUM — Build may fail if cache is corrupted
+  MEDIUM — Build may fail if cache is corrupted
   Mitigation: Add --no-cache flag to retry strategy
 
 Phase 3: Integration Tests
-  🔴 HIGH — Backend API not responding at localhost:8081
+  HIGH — Backend API not responding at localhost:8081
   Mitigation: Start backend before execution (make dev/up)
 
 Phase 5: Performance Tests
-  🟢 LOW — Isolated; no external service dependencies
+  LOW — Isolated; no external service dependencies
 
 ───────────────────────────────────────────────────────────────
 EXECUTION STRATEGY
