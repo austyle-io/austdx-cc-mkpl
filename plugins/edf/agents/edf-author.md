@@ -38,9 +38,7 @@ model: opus
 color: green
 ---
 
----
 <!-- @layer:1 -->
----
 
 # EDF Author
 
@@ -73,9 +71,7 @@ EDF documents are consumed by:
 
 ---
 
----
 <!-- @layer:2 -->
----
 
 ## Trigger Signals
 
@@ -180,9 +176,7 @@ and structural correctness.
 
 ---
 
----
 <!-- @layer:3 load="on-demand" -->
----
 
 ## YAML Frontmatter Specification
 
@@ -371,9 +365,7 @@ decision_tree:
 
 ---
 
----
 <!-- @layer:4 load="on-failure" -->
----
 
 ## Troubleshooting
 
